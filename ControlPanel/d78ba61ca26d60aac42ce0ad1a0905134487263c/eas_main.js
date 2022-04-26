@@ -66,7 +66,7 @@ function sendMessage() {
     //console.log(MSG)
 
     const request = new XMLHttpRequest();
-    request.open("POST", "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g");
+    request.open("POST", `${{ secrets.EAS_WEBHOOK }}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
         content: `EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `,
