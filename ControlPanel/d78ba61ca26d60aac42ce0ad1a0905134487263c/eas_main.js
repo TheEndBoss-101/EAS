@@ -5,11 +5,11 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const loadStates = async () => {
-	return await (await fetch("https://raw.githubusercontent.com/TheEndBoss-101/EAS/main/d78ba61ca26d60aac42ce0ad1a0905134487263c/state.json")).json();
+	return await (await fetch("./state.json")).json();
 };
 
 const loadCounties = async () => {
-	return await (await fetch("https://raw.githubusercontent.com/TheEndBoss-101/EAS/main/d78ba61ca26d60aac42ce0ad1a0905134487263c/county.json")).json();
+	return await (await fetch("./county.json")).json();
 };
 
 let states, counties;
