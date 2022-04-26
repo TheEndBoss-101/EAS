@@ -1,5 +1,5 @@
 alert("WARNING: HIGHLY EXPERMENTAL!")
-console.log("V: 3.3")
+console.log("V: 3.4")
 
 function sendMessage() {
     const ORG = originator.value
@@ -25,7 +25,7 @@ function sendMessage() {
     request.open("POST", "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g");
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: `EAS EVENT: "${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}+${MSG}" Transcript: "${MSG}`,
+        content: `EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}+${MSG}\` \n Transcript: \`${MSG}\` `,
         ttss: true
     }
 
