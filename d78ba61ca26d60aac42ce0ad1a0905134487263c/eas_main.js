@@ -1,5 +1,49 @@
 alert("WARNING: HIGHLY EXPERMENTAL!")
-console.log("V: 3.8")
+console.log("V: 4.0")
+
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+const loadStates = async () => {
+	return await (await fetch("https://raw.githubusercontent.com/TheEndBoss-101/EAS/main/d78ba61ca26d60aac42ce0ad1a0905134487263c/state.json")).json();
+};
+
+const loadCounties = async () => {
+	return await (await fetch("https://raw.githubusercontent.com/TheEndBoss-101/EAS/main/d78ba61ca26d60aac42ce0ad1a0905134487263c/county.json")).json();
+};
+
+let states, counties;
+
+(async () => {
+	try {
+		states = await loadStates();
+		counties = await loadCounties();
+		
+		$("#state").innerHTML = "<option value=\"00\">Entire nation</option>";
+		Object.keys(states).forEach((id) => {
+			const o = document.createElement('option');
+			o.value = id;
+			o.innerText = states[id];
+			$("#state").appendChild(o);
+		});
+		
+		updateCounties();
+	} catch(e) {
+		alert(`Failed to load states and counties. ${e}`)
+	}
+	
+	// generate();
+})();
+
+function updateCounties() {
+	$("#county").innerHTML = "<option value=\"000\">Entire state</option>";
+	Object.keys(counties[$("#state").value] || []).forEach((id) => {
+		const o = document.createElement('option');
+		o.value = id;
+		o.innerText = counties[$("#state").value][id];
+		$("#county").appendChild(o);
+	});
+}
 
 function sendMessage() {
     const ORG = originator.value
@@ -34,19 +78,12 @@ function sendMessage() {
 
 function sendRWT() {
     const ORG = originator.value
-    //console.log(ORG)
     const P = subdiv.value
-    //console.log(P)
     const SS = state.value
-    //console.log(SS)
     const CCC = county.value
-    //console.log(CCC)
     const PSSCCC = P+SS+CCC
-    //console.log(PSSCCC)
     const HHMM = purgetime.value
-    //console.log(HHMM)
     const LLLLLLLL = senderCallsign.value
-    //console.log(LLLLLLLL)
 
     const request = new XMLHttpRequest();
     request.open("POST", "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g");
@@ -61,19 +98,12 @@ function sendRWT() {
 
 function sendRMT() {
     const ORG = originator.value
-    //console.log(ORG)
     const P = subdiv.value
-    //console.log(P)
     const SS = state.value
-    //console.log(SS)
     const CCC = county.value
-    //console.log(CCC)
     const PSSCCC = P+SS+CCC
-    //console.log(PSSCCC)
     const HHMM = purgetime.value
-    //console.log(HHMM)
     const LLLLLLLL = senderCallsign.value
-    //console.log(LLLLLLLL)
 
     const request = new XMLHttpRequest();
     request.open("POST", "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g");
