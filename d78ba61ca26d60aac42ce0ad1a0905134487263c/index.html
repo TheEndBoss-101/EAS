@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARC EAS</title>
-    <script src="eas_main.js?version=3.8"></script>
+    <script src="eas_main.js?version=4.0"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -14,7 +14,7 @@
 
 <body>
     <h1>EAS (Emergency Alert System) ARC Webhook.</h1>
-    <h2>V3.8</h2>
+    <h2>V4.0</h2>
     <a href="https://github.com/TheEndBoss-101/EAS" target="_BLANK">Github Repo</a>
     <br>
     <br>
@@ -55,21 +55,19 @@
                 <option value="9">Southeast</option>
             </select>
         </fieldset>
-        <fieldset>
-            <legend>State - WIP</legend>
-            <select id="state">
-                <option value="00" selected>00</option>
-                <option value="01" selected>Alabama</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <legend>County - WIP</legend>
-            <select id="county">
-                <option value="000" selected>000</option>
-                <option value="001" selected>Autauga County</option>
-                <option value="003">Baldwin County</option>
-            </select>
-        </fieldset>
+	<fieldset>
+		<legend>State</legend>
+		<select id="state" onchange="updateCounties();onChange()">
+			<option value="-1">Loading...</option>
+		</select>
+	</fieldset>
+	<fieldset>
+		<legend>County</legend>
+		<select id="county" onchange="onChange()">
+			<option value="-1">Loading...</option>
+		</select>
+	</fieldset>
+</fieldset>
     </fieldset>
     <fieldset>
         <legend>Purge time (HHMM)</legend>
