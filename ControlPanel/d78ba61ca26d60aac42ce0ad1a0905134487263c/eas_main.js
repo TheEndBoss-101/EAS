@@ -82,7 +82,6 @@ function sendRWT() {
     const SS = state.value
     const CCC = county.value
     const PSSCCC = P+SS+CCC
-    const HHMM = purgetime.value
     const LLLLLLLL = senderCallsign.value
 
     const request = new XMLHttpRequest();
@@ -102,7 +101,6 @@ function sendRMT() {
     const SS = state.value
     const CCC = county.value
     const PSSCCC = P+SS+CCC
-    const HHMM = purgetime.value
     const LLLLLLLL = senderCallsign.value
 
     const request = new XMLHttpRequest();
