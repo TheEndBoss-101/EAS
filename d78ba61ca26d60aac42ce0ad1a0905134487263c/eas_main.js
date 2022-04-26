@@ -109,7 +109,7 @@ function sendRMT() {
     request.open("POST", "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g");
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: `EAS EVENT: \`${ORG}-RWT-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
+        content: `EAS EVENT: \`${ORG}-RMT-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
         ttss: true
     }
 
