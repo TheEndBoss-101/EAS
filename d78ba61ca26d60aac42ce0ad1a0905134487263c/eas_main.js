@@ -1,5 +1,5 @@
 alert("WARNING: HIGHLY EXPERMENTAL!")
-console.log("V: 3.5")
+console.log("V: 3.6")
 
 function sendMessage() {
     const ORG = originator.value
