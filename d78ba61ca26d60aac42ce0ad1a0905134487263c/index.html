@@ -34,6 +34,8 @@
         <legend>Event - Wip</legend>
         <select id="events">
             <option value="DMO" selected>DMO - Practice/Demo Warning</option>
+            <option value="RWT">RWT - Required Weekly Test</option>
+            <option value="RMT">RMT - Required Monthly Test</option>
         </select>
     </fieldset>
     <fieldset>
@@ -56,12 +58,14 @@
         <fieldset>
             <legend>State - WIP</legend>
             <select id="state">
+                <option value="00" selected>00</option>
                 <option value="01" selected>Alabama</option>
             </select>
         </fieldset>
         <fieldset>
             <legend>County - WIP</legend>
             <select id="county">
+                <option value="000" selected>000</option>
                 <option value="001" selected>Autauga County</option>
                 <option value="003">Baldwin County</option>
             </select>
@@ -118,6 +122,14 @@
     <fieldset>
         <legend>Send</legend>
         <button onclick="sendMessage()">Send</button>
+    </fieldset>
+    <fieldset>
+        <legend>Send RWT</legend>
+        <button onclick="sendRWT()">Send</button>
+    </fieldset>
+    <fieldset>
+        <legend>Send RMT</legend>
+        <button onclick="sendRMT()">Send</button>
     </fieldset>
 </body>
 
