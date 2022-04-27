@@ -129,3 +129,4 @@ function generate() {
     
 	$("#code").innerText = `${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}`;
 }
+generate()

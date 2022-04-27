@@ -126,6 +126,7 @@ function generate() {
     const HHMM = purgetime.value
     const LLLLLLLL = senderCallsign.value
     const MSG = message.value
-    
+
 	$("#code").innerText = `${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}`;
 }
+generate()
