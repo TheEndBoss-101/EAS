@@ -116,6 +116,25 @@ function sendRMT() {
     request.send(JSON.stringify(params));
 }
 
+function sendRDT() {
+    const ORG = originator.value
+    const P = subdiv.value
+    const SS = state.value
+    const CCC = county.value
+    const PSSCCC = P+SS+CCC
+    const LLLLLLLL = senderCallsign.value
+
+    const request = new XMLHttpRequest();
+    request.open("POST", `${EAS_WEBHOOK}`);
+    request.setRequestHeader('Content-type', 'application/json');
+    const params = {
+        content: `EAS EVENT: \`${ORG}-RMT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
+        ttss: true
+    }
+
+    request.send(JSON.stringify(params));
+}
+
 function generate() {
     const ORG = originator.value
     const EEE = events.value
