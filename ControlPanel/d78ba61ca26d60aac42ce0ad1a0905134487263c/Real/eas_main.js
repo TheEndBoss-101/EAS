@@ -90,7 +90,7 @@ function sendRWT() {
     request.open("POST", `${EAS_WEBHOOK}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: `EAS EVENT: \`${ORG}-RWT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated weakly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
+        content: `EAS EVENT: \`${ORG}-RWT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
         ttss: true
     }
 
