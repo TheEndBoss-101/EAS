@@ -22,7 +22,7 @@
     <br>
     <fieldset>
         <legend>Originator</legend>
-        <select id="originator">
+        <select id="originator" onchange="generate()">
             <option value="PEP">PEP - Primary Entry Point System</option>
             <option value="CIV">CIV - Civil authorities</option>
             <option value="WXR">WXR - National Weather Service</option>
@@ -34,7 +34,7 @@
     </fieldset>
     <fieldset>
         <legend>Event - Wip</legend>
-        <select id="events">
+        <select id="events" onchange="generate()">
             <option value="DMO" selected>DMO - Practice/Demo Warning</option>
             <option value="RWT">RWT - Required Weekly Test</option>
             <option value="RMT">RMT - Required Monthly Test</option>
@@ -44,7 +44,7 @@
         <legend>Location</legend>
         <fieldset>
             <legend>Area</legend>
-            <select id="subdiv">
+            <select id="subdiv" onchange="generate()">
                 <option value="0" selected>Entire region</option>
                 <option value="1">Northwest</option>
                 <option value="2">North</option>
@@ -73,7 +73,7 @@
     </fieldset>
     <fieldset>
         <legend>Purge time (HHMM)</legend>
-        <select id="purgetime">
+        <select id="purgetime" onchange="generate()">
             <option value="0000">0000</option>
             <option value="0015" selected>0015</option>
             <option value="0030">0030</option>
@@ -127,6 +127,9 @@
         <br>
         <button onclick="sendRMT()">Send RMT</button>
     </fieldset>
+    <div>Code:
+        <pre id="code"></pre>
+    </div>
 </body>
 
 </html>

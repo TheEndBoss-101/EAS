@@ -115,3 +115,17 @@ function sendRMT() {
 
     request.send(JSON.stringify(params));
 }
+
+function generate() {
+    const ORG = originator.value
+    const EEE = events.value
+    const P = subdiv.value
+    const SS = state.value
+    const CCC = county.value
+    const PSSCCC = P+SS+CCC
+    const HHMM = purgetime.value
+    const LLLLLLLL = senderCallsign.value
+    const MSG = message.value
+    
+	$("#code").innerText = `${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}`;
+}
