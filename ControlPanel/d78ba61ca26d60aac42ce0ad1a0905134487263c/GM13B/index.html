@@ -138,7 +138,7 @@
         <fieldset>
             <legend>Code</legend>
             <div>
-                <textarea id="code" placeholder="{WAITING FOR USER INPUIT}" rows="4" cols="50" readonly></textarea>
+                <textarea id="code" placeholder="{WAITING FOR USER INPUIT}" rows="4" cols="58" readonly></textarea>
             </div>
         </fieldset>
     </fieldset>
@@ -148,11 +148,24 @@
             <legend>Send</legend>
             <button onclick="sendMessage()">Send</button>
             <br>
-            <button onclick="sendRWT()">Send Required Weekly Test</button>
             <br>
             <button onclick="sendRMT()">Send Required Monthly Test</button>
+            <p>MESSAGE FOR RMT:</p>
+            <p>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that
+                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
+                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
+            <br>
+            <button onclick="sendRWT()">Send Required Weekly Test</button>
+            <p>MESSAGE FOR RWT:</p>
+            <p>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that
+                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
+                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
             <br>
             <button onclick="sendRDT()">Send Required Daily Test</button>
+            <p>MESSAGE FOR RDT:</p>
+            <p>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that
+                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
+                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
         </fieldset>
     </fieldset>
 </body>
