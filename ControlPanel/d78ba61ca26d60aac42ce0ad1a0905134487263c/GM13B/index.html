@@ -29,8 +29,8 @@
     <fieldset>
         <fieldset>
             <legend>Webhook</legend>
-            <textarea id="webhook" placeholder="Webhook" rows="2"
-                cols="68">https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g</textarea>
+            <textarea id="webhook" placeholder="Webhook" rows="2" cols="68"
+                onchange="generate()">https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g</textarea>
         </fieldset>
         <legend>Make</legend>
         <fieldset>
@@ -129,7 +129,7 @@
         </fieldset>
         <fieldset>
             <legend>Message</legend>
-            <textarea id="message" placeholder="Message" rows="4" cols="50"></textarea>
+            <textarea id="message" placeholder="Message" rows="4" cols="50" onchange="generate()"></textarea>
         </fieldset>
     </fieldset>
     </fieldset>
