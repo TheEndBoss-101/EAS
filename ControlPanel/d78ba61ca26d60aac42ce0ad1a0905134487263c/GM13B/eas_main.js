@@ -150,6 +150,7 @@ function generate() {
     const MSG = message.value
     const EAS_WEBHOOK = webhook.value
 
-	$("#code").innerText = `WebHook: ${EAS_WEBHOOK} \n Code: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Message ${MSG}`;
+	$("#code").innerText = `WebHook: ${EAS_WEBHOOK} \n Code: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Message: ${MSG}`;
 }
+
 generate()
