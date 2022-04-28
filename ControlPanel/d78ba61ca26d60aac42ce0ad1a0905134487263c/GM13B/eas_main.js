@@ -153,4 +153,4 @@ function generate() {
 	$("#code").innerText = `WebHook: ${EAS_WEBHOOK} \n Code: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Message: ${MSG}`;
 }
 
-generate()
+//generate()
