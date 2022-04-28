@@ -45,8 +45,6 @@ function updateCounties() {
 	});
 }
 
-const EAS_WEBHOOK = "https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g"
-
 function sendMessage() {
     const ORG = originator.value
     //console.log(ORG)
@@ -66,6 +64,8 @@ function sendMessage() {
     //console.log(LLLLLLLL)
     const MSG = message.value
     //console.log(MSG)
+    const EAS_WEBHOOK = webhook.value
+    //console.log(EAS_WEBHOOK)
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -85,6 +85,7 @@ function sendRWT() {
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
+    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -104,6 +105,7 @@ function sendRMT() {
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
+    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -123,6 +125,7 @@ function sendRDT() {
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
+    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -145,7 +148,8 @@ function generate() {
     const HHMM = purgetime.value
     const LLLLLLLL = senderCallsign.value
     const MSG = message.value
+    const EAS_WEBHOOK = webhook.value
 
-	$("#code").innerText = `${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}`;
+	$("#code").innerText = `WebHook: ${EAS_WEBHOOK} \n Code: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Message ${MSG}`;
 }
 generate()

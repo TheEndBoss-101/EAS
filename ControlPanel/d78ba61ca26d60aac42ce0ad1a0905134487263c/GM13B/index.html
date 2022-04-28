@@ -21,10 +21,16 @@
     <h1>EAS (Emergency Alert System) ARC Webhook.</h1>
     <h2>V4.0</h2>
     <a href="https://github.com/TheEndBoss-101/EAS" target="_BLANK">Github Repo</a>
-    <a href="https://theendboss-101.github.io/EAS/ControlPanel/d78ba61ca26d60aac42ce0ad1a0905134487263c/index.html">Back</a>
+    <a
+        href="https://theendboss-101.github.io/EAS/ControlPanel/d78ba61ca26d60aac42ce0ad1a0905134487263c/index.html">Back</a>
     <br>
     <br>
     <fieldset>
+        <fieldset>
+            <legend>Webhook</legend>
+            <textarea id="webhook" placeholder="Webhook" rows="2"
+                cols="68">https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g</textarea>
+        </fieldset>
         <legend>Make</legend>
         <fieldset>
             <legend>Originator</legend>
@@ -66,13 +72,13 @@
             <fieldset>
                 <legend>State</legend>
                 <select id="state" onchange="updateCounties();generate()">
-                    <option value="-1">Loading...</option>
+                    <option value="00">Loading...</option>
                 </select>
             </fieldset>
             <fieldset>
                 <legend>County</legend>
                 <select id="county" onchange="generate()">
-                    <option value="-1">Loading...</option>
+                    <option value="000">Loading...</option>
                 </select>
             </fieldset>
         </fieldset>
@@ -144,7 +150,7 @@
             <button onclick="sendRWT()">Send RWT</button>
             <br>
             <button onclick="sendRMT()">Send RMT</button>
-           <br>
+            <br>
             <button onclick="sendRDT()">Send RDT</button>
         </fieldset>
     </fieldset>
