@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARC EAS</title>
-    <script type="module" src="./eas_main.js?version=4.0" defer></script>
+    <script src="./eas_main.js?version=4.0" defer></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -16,6 +16,9 @@
         }
     </style>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+    </script>
 </head>
 
 <body>

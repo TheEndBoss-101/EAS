@@ -1,7 +1,5 @@
 alert("WARNING: HIGHLY EXPERMENTAL!")
 console.log("EAS_MAIN.JS - V: 4.0")
-
-        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
         const octokit = new Octokit({ auth: `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` });
         async function sendeas() {
             var getfromgit = await octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
