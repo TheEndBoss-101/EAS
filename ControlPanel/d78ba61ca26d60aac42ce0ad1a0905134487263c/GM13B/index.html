@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="module" defer>
         import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-        window.octokit = new Octokit({ auth: `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` });
+        window.octokit = new Octokit({ auth: `${process.env.authtoken}` });
     </script>
     <script type="text/javascript" defer>
         async function sendeas() {
