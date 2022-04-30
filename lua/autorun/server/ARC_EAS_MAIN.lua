@@ -1,5 +1,6 @@
 --[[
-  === TABEL NAMEING CONVENTION ===
+  --- ARC ISSUE ---
+  === TABEL INFO ===
   Emergency Alert System Garry's Mod Add-On
   By: TheEndBoss_101
   With support from:
@@ -10,17 +11,16 @@
   Purpace: To provide up to date detals about Events, Wars, Etc... at a seconds notice
   
   Adminstrators:
-  -- These are people with PEP aucess to the EAS System.
-  -- The data in the () are values transmitted with there batch files.
+  -- These are people with aucess to the EAS System.
   -- ORG: the org code.
   -- LLLLLLLL: There call sign.
-    1. TheEndBoss_101 (ORG: PEP, LLLLLLLL: TEB_101)
-    2. Mobinix (ORG: ARC, LLLLLLLL: MOBINIX)
-    3. Milo (ORG: AMTF, LLLLLLLL: MILO)
-    4. Fluffy (ORG: CIV,LLLLLLLL: FLUFFY)
+    1. TheEndBoss_101:  (ORG: PEP,    LLLLLLLL: TEB_101)
+    2. Mobinix:         (ORG: ARC,    LLLLLLLL: MOBINIX)
+    3. Milo:            (ORG: AMTF,   LLLLLLLL: MILO)
+    4. Fluffy:          (ORG: CIV,    LLLLLLLL: FLUFFY)
+    5. Cache99:         (ORG: CIV,    LLLLLLLL: CACHE)
   Nameing: 
-    1. No Underscores/Spaces.
-    2. 
+    1. No Dashes, Underscores, Spaces.
   Name Order:
     1. EAS (Top Level)
     2. DATA (Tabel Containg EAS Values)
