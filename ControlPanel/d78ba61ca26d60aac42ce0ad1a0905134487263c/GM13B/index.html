@@ -44,7 +44,7 @@
             const LLLLLLLL = senderCallsign.value
             const MSG = message.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Transcript: ${MSG}`);
+            var gitcontent = btoa(`EAS EVENT: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\nTranscript: ${MSG}`);
             console.log(gitcontent)
 
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
