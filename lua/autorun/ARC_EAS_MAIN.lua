@@ -5,7 +5,6 @@
   By: TheEndBoss_101
   With support from:
     1. Xalalau
-    2. Zauro
   Thank you for helping me make this Garry's Mod Addon.
   For: A.R.C. & The GM13B Community
   Purpace: To provide up to date detals about Events, Wars, Etc... at a seconds notice
@@ -141,8 +140,8 @@ EAS_DATA = {
     ["Codes"] = {
       ["01"] = {
         ["ID"] = "01",
-        ["Name"] = "Alabama",
-        ["Alpha"] = "AL",
+        ["Name"] = "A.R.C.",
+        ["Alpha"] = "Anomaly. Research. Center.",
         ["Deprecated"] = false,
         ["County"] = {
           ["001"] = {
@@ -158,6 +157,13 @@ EAS_DATA = {
             ["Deprecated"] = false
           }
         }
+      },
+      ["02"] = {
+        ["ID"] = "02",
+        ["Name"] = "A.M.T.F.",
+        ["Alpha"] = "Anti. Mingebag. Task. Force.",
+        ["Deprecated"] = false,
+        ["County"] = {}
       }
     }
   },
@@ -269,7 +275,38 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Code: " ..EAS_DATA_CallSign_LLLLLLLL_Code)
     print("    PresOf: " ..EAS_DATA_CallSign_LLLLLLLL_PresOf)
   end
-  
 end
 EAS_MakeGobals("PEP", "EEE", "PSSCCC", "HHMM", "TEB_101")
 
+if CLIENT then
+ReturnedHTML = ""
+LastReturnedHTML = "1"
+ReturnedHTML2 = ""
+LastReturnedHTML2 = "1"
+URL = "https://theendboss-101.github.io/EAS/EAS/Send.html"
+
+function checkdata()
+	http.Fetch(URL,
+		function( body, length, headers, code )
+			ReturnedHTML = body
+			if ReturnedHTML == LastReturnedHTML then
+				if true then end
+			else
+        local messagept1 = string.match(ReturnedHTML, "EAS EVENT:(.*)")
+        local sameheader = string.match(messagept1, "(.+)<br>")
+        local transcript = string.match(messagept1, "Transcript:(.*)")
+        --EAS_MakeGobals()
+        --local Message = ""
+				chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), transcript)
+				chat.PlaySound()
+				LastReturnedHTML = ReturnedHTML
+			end
+		end
+	)
+  function(message)
+		print(message)
+	end
+end
+
+timer.Create("EAS_FETCH_HTML", 15, 0, checkdata)
+end

@@ -66,13 +66,24 @@ function sendMessage() {
     //console.log(MSG)
     const EAS_WEBHOOK = webhook.value
     //console.log(EAS_WEBHOOK)
+    const UseTTS = tts.value
+    console.log(UseTTS)
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
         content: `EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `,
-        ttss: true
+        tts: false,
+        allowed_mentions: { "parse": [] }
+    }
+
+    if (document.getElementById('tts').Checked) {
+        params.tts = true
+    }
+    if (document.getElementById('ate').Checked) {
+        params.content = `@everyone \n EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
 
     request.send(JSON.stringify(params));
@@ -93,7 +104,16 @@ function sendRWT() {
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
         content: `EAS EVENT: \`${ORG}-RWT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
-        ttss: true
+        tts: false,
+        allowed_mentions: { "parse": [] }
+    }
+
+    if (document.getElementById('tts').Checked) {
+        params.tts = true
+    }
+    if (document.getElementById('ate').Checked) {
+        params.content = `@everyone \n EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
 
     request.send(JSON.stringify(params));
@@ -113,7 +133,16 @@ function sendRMT() {
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
         content: `EAS EVENT: \`${ORG}-RMT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
-        ttss: true
+        tts: false,
+        allowed_mentions: { "parse": [] }
+    }
+
+    if (document.getElementById('tts').Checked) {
+        params.tts = true
+    }
+    if (document.getElementById('ate').Checked) {
+        params.content = `@everyone \n EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
 
     request.send(JSON.stringify(params));
@@ -133,7 +162,16 @@ function sendRDT() {
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
         content: `EAS EVENT: \`${ORG}-RDT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.\` \n `,
-        ttss: true
+        tts: false,
+        allowed_mentions: { "parse": [] }
+    }
+
+    if (document.getElementById('tts').Checked) {
+        params.tts = true
+    }
+    if (document.getElementById('ate').Checked) {
+        params.content = `@everyone \n EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`${MSG}\` \n `
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
 
     request.send(JSON.stringify(params));
