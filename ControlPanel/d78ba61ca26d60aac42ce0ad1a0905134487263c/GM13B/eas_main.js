@@ -1,32 +1,5 @@
 //alert("WARNING: HIGHLY EXPERMENTAL!")
 console.log("EAS_MAIN.JS - V: 5.0")
-        const octokit = new Octokit({ auth: `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` });
-        async function sendeas() {
-            var getfromgit = await octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
-                owner: 'TheEndBoss-101',
-                repo: 'EAS',
-                path: 'EAS/Send.html',
-            })
-            console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
-            var gitsha = getfromgit.data["sha"]
-            console.log(gitsha);
-            //var gitcontent = btoa('Hello, World! TESTING');
-            console.log(gitcontent)
-            await octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
-                owner: 'TheEndBoss-101',
-                repo: 'EAS',
-                path: 'EAS/Send.html',
-                message: 'SEND EAS MESSAGE',
-                committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
-                },
-                content: `${gitcontent}`,
-                sha: `${gitsha}`
-            })
-        }
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -103,8 +76,7 @@ function sendMessage() {
     }
 
     request.send(JSON.stringify(params));
-    sendeas()
-    var gitcontent = btoa(`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}`);
+    //sendeasfunc();
 }
 
 function sendRWT() {
