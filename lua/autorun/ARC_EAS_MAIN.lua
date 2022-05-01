@@ -285,5 +285,6 @@ function checkdata()
 end
 
 timer.Create("EAS_FETCH_HTML", 15, 0, checkdata)
+chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
 end
 concommand.Add("cgm13d_eas_checkdata",checkdata)
