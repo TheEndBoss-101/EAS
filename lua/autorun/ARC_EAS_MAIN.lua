@@ -1,57 +1,3 @@
---[[
-  --- ARC ISSUE ---
-  === TABEL INFO ===
-  Emergency Alert System Garry's Mod Add-On
-  By: TheEndBoss_101
-  With support from:
-    1. Xalalau
-  Thank you for helping me make this Garry's Mod Addon.
-  For: A.R.C. & The GM13B Community
-  Purpace: To provide up to date detals about Events, Wars, Etc... at a seconds notice
-  
-  Adminstrators:
-  -- These are people with aucess to the EAS System.
-  -- ORG: the org code.
-  -- LLLLLLLL: There call sign.
-    1. TheEndBoss_101:  (ORG: PEP,    LLLLLLLL: TEB_101)
-    2. Mobinix:         (ORG: ARC,    LLLLLLLL: MOBINIX)
-    3. Milo:            (ORG: AMTF,   LLLLLLLL: MILO)
-    4. Fluffy:          (ORG: CIV,    LLLLLLLL: FLUFFY)
-    5. Cache99:         (ORG: CIV,    LLLLLLLL: CACHE)
-  Nameing: 
-    1. No Dashes, Underscores, Spaces.
-  Name Order:
-    1. EAS (Top Level)
-    2. DATA (Tabel Containg EAS Values)
-      2A. Key = Key codes
-        2AA. USA-Type
-        2AB. CAN/MEX-Type
-        2AC. Event-Type
-      2B. Originator
-      2C. Event codes
-      2D. FIPS
-        2DA. SubDiv (Value of "P")
-          2DAA. 0 = Entire US
-          2DAB. 1 = North West
-          2DAC. 2 = North
-          2DAD. 3 = North East
-          2DAE. 4 = West
-          2DAF. 5 = Central
-          2DAG. 6 = East
-          2DAH. 7 = South West
-          2DAI. 8 = South
-          2DAJ. 9 = South East
-        2DB. State Code (Value of "SS")
-          2DBA. 01 = Alabama
-          Etc...
-          2DBB. County (Value of "CCC")
-            2DBBA. 000 = Entire State
-            2DBBB. 001 = Autauga County
-            Etc...
-    3. Recive = Function controling what happens when a EAS message comes thrugh from a server to a client.
-    4. MakeGobals = Function that makes/updates gobal values
-]]
-
 EAS_DEVMODE = true
 
 EAS_DATA = {
@@ -110,7 +56,7 @@ EAS_DATA = {
       ["Code"] = "Annomly Research Center",
       ["Deprecated"] = false
     },
-    ["AMTF"] = {
+    ["MTF"] = {
       ["ID"] = "AMTF",
       ["Code"] = "Anti Mingebag Task Force",
       ["Deprecated"] = false
@@ -275,8 +221,9 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Code: " ..EAS_DATA_CallSign_LLLLLLLL_Code)
     print("    PresOf: " ..EAS_DATA_CallSign_LLLLLLLL_PresOf)
   end
+  SameMessage = "The" ..ORG.. "Has isshued the following WIP for" ..EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ", " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name
 end
-EAS_MakeGobals("PEP", "EEE", "PSSCCC", "HHMM", "TEB_101")
+--EAS_MakeGobals("PEP", "EEE", "PSSCCC", "HHMM", "TEB_101")
 
 if CLIENT then
 ReturnedHTML = ""
@@ -292,20 +239,26 @@ function checkdata()
 			if ReturnedHTML == LastReturnedHTML then
 				if true then end
 			else
-        local messagept1 = string.match(ReturnedHTML, "EAS EVENT:(.*)")
-        local sameheader = string.match(messagept1, "(.+)<br>")
-        local transcript = string.match(messagept1, "Transcript:(.*)")
-        --EAS_MakeGobals()
-        --local Message = ""
-				chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), transcript)
+        local ReturnedHTMLBody = string.match(ReturnedHTML, "EAS EVENT: (.*)")
+        local SAMEHeader = string.match(ReturnedHTMLBody, "(.+)<br>")
+        local Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
+        local SAMEHeader_ORG = string.sub(SAMEHeader, 1, 3)
+        local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
+        local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
+        local SAMEHeader_HHMM = string.sub(SAMEHeader, 16, 19)
+        local SAMEHeader_LLLLLLLL = string.sub(SAMEHeader, 21, 28)
+        EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
+        chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader)
+        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), SameMessage)
+        chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), Transcript)
 				chat.PlaySound()
 				LastReturnedHTML = ReturnedHTML
 			end
 		end
 	)
-  function(message)
+  --[[function(message)
 		print(message)
-	end
+	end--]]
 end
 
 timer.Create("EAS_FETCH_HTML", 15, 0, checkdata)
