@@ -23,7 +23,7 @@ Thank you all for helping me make this Garry's Mod Addon.
 | User | ORG | CallSign |
 | ----------- | ----------- | ----------- |
 | TheEndBoss_101 | PEP | TEB_101 |
-| Mobinix | ARC | MOBINIX |
+| Mobinix | ARC | MOB |
 | Milo | MTF | MILO |
 | Fluffy | CIV | FLUFFY |
 | Cache99 | CIV | CACHE |

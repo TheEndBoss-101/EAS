@@ -1,4 +1,4 @@
-EAS_DEVMODE = true
+EAS_DEVMODE = false
 
 EAS_DATA = {
   ["Key"] = {
@@ -119,16 +119,38 @@ EAS_DATA = {
       ["Code"] = "White House",
       ["PresOf"] = "United States Of America"
     },
-    ["TEB_101"] = {
+    ["TEB_101 "] = {
       ["ID"] = "TEB_101",
       ["Code"] = "TheEndBoss_101",
       ["PresOf"] = "Emergency Alert System"
+    },
+    ["MOBENIX "] = {
+      ["ID"] = "MOB",
+      ["Code"] = "MOBENIX",
+      ["PresOf"] = "A.R.C."
+    },
+    ["MILO    "] = {
+      ["ID"] = "MILO",
+      ["Code"] = "Milo",
+      ["PresOf"] = "A.M.T.F."
+    },
+    ["FLUFFY  "] = {
+      ["ID"] = "FLUFFY",
+      ["Code"] = "Fluffy",
+      ["PresOf"] = ""
+    },
+    ["CACHE   "] = {
+      ["ID"] = "CACHE",
+      ["Code"] = "Cache",
+      ["PresOf"] = ""
     }
   }
 }
 
 function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
   
+  print(LLLLLLLL)
+
   P = string.sub(PSSCCC, 1, 1)
   SS = string.sub(PSSCCC, 2, 3)
   CCC = string.sub(PSSCCC, -3)
@@ -221,7 +243,7 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Code: " ..EAS_DATA_CallSign_LLLLLLLL_Code)
     print("    PresOf: " ..EAS_DATA_CallSign_LLLLLLLL_PresOf)
   end
-  SameMessage = "The" ..ORG.. "Has isshued the following WIP for" ..EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ", " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name
+  SameMessage = "The " ..ORG.. " Has isshued the following WIP for " ..EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ", " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name
 end
 --EAS_MakeGobals("PEP", "EEE", "PSSCCC", "HHMM", "TEB_101")
 
@@ -246,7 +268,8 @@ function checkdata()
         local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
         local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
         local SAMEHeader_HHMM = string.sub(SAMEHeader, 16, 19)
-        local SAMEHeader_LLLLLLLL = string.sub(SAMEHeader, 21, 28)
+        local SAMEHeader_LLLLLLLL_Pt1 = string.sub(SAMEHeader, 21, 28)
+        local SAMEHeader_LLLLLLLL = SAMEHeader_LLLLLLLL_Pt1 .. string.rep(" ", 8 - SAMEHeader_LLLLLLLL_Pt1:len())
         EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
         chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader)
         chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), SameMessage)
@@ -263,3 +286,4 @@ end
 
 timer.Create("EAS_FETCH_HTML", 15, 0, checkdata)
 end
+concommand.Add("cgm13d_eas_checkdata",checkdata)
