@@ -1,0 +1,13 @@
+{
+	"title": "GM13B EAS System.",
+	"type": "tool",
+	"tags": [
+		"roleplay",
+		"fun"
+	],
+	"ignore": [
+		"*.psd",
+		"*.vcproj",
+		"*.svn*"
+	]
+}
