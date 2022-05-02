@@ -84,6 +84,33 @@ EAS_DATA = {
       ["Description"] = "Practice/Demo Warning",
       ["Level"] = "TEST",
       ["Deprecated"] = false
+    },
+    ["RMT"] = {
+      ["ID"] = "RMT",
+      ["USA-Type"] = "M",
+      ["CAN-Type"] = "RT",
+      ["MEX-Type"] = "NI",
+      ["Description"] = "Required Monthly Test",
+      ["Level"] = "TEST",
+      ["Deprecated"] = false
+    },
+    ["RWT"] = {
+      ["ID"] = "RWT",
+      ["USA-Type"] = "M",
+      ["CAN-Type"] = "RT",
+      ["MEX-Type"] = "CI",
+      ["Description"] = "Required Weekly Test",
+      ["Level"] = "TEST",
+      ["Deprecated"] = false
+    },
+    ["RDT"] = {
+      ["ID"] = "RDT",
+      ["USA-Type"] = "M",
+      ["CAN-Type"] = "RI",
+      ["MEX-Type"] = "NI",
+      ["Description"] = "Required Daily Test",
+      ["Level"] = "TEST",
+      ["Deprecated"] = false
     }
   },
   ["FIPS"] = {
