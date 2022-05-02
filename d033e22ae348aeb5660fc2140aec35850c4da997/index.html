@@ -61,7 +61,7 @@
             })
         }
 
-        async function sendrmteas() {
+        async function send_RMT_EAS() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
@@ -98,7 +98,7 @@
             })
         }
 
-        async function sendrwteas() {
+        async function send_RWT_EAS() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
@@ -134,7 +134,7 @@
             })
         }
 
-        async function sendrdteas() {
+        async function send_RDT_EAS() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
@@ -169,6 +169,42 @@
                 sha: `${gitsha}`
             })
         }
+
+        async function send_EAN_EAS() {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+                owner: 'TheEndBoss-101',
+                repo: 'EAS',
+                path: 'EAS/Send.html',
+            })
+            console.log(getfromgit)
+            //var getfromgitJson = JSON.parse(getfromgit);
+            //console.log(getfromgitJson)
+            var gitsha = getfromgit.data["sha"]
+            console.log(gitsha);
+
+            const ORG = originator.value
+            const P = subdiv.value
+            const SS = state.value
+            const CCC = county.value
+            const PSSCCC = P + SS + CCC
+            const LLLLLLLL = senderCallsign.value
+
+            var gitcontent = btoa(`EAS EVENT: ${ORG}-EAN-${PSSCCC}-1200-${LLLLLLLL} <br> Transcript: We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. `);
+            console.log(gitcontent)
+
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+                owner: 'TheEndBoss-101',
+                repo: 'EAS',
+                path: 'EAS/Send.html',
+                message: 'SEND EAS EAN MESSAGE',
+                committer: {
+                    name: 'TheEndBoss-101',
+                    email: 'theendboss101@gmail.com'
+                },
+                content: `${gitcontent}`,
+                sha: `${gitsha}`
+            })
+        }
     </script>
     <script src="./eas_main.js?version=5.0" defer></script>
 </head>
@@ -181,13 +217,6 @@
     <br>
     <br>
     <fieldset>
-        <fieldset>
-            <legend>Webhook</legend>
-            <!--textarea id="webhook" placeholder="Webhook" rows="2" cols="68"
-                onchange="generate()">https://discord.com/api/webhooks/965359101926314025/H6RpMxAvESc9GQ3ip-wPVCqxSgeBwknVHaWZSE3v6PiaRmsw7GGBlqkINK7ff12V9M3g</textarea-->
-            <textarea id="webhook" placeholder="Webhook" rows="2" cols="68"
-                onchange="generate()">https://discord.com/api/webhooks/970129768529936424/m9_onrUyHGtYy0CItcu_9uzUzaN35XESTgLazCGsVGdqJXKFpkZFfYOS1raM8iFqLIMS</textarea>
-        </fieldset>
         <fieldset>
             <legend>Settings - WIP</legend>
             <input type="checkbox" id="tts" name="tts">
@@ -203,7 +232,7 @@
                 <option value="CIV">CIV - Civil authorities</option>
                 <option value="EAS" selected>EAS - Emergency Alert System participant</option>
                 <option value="ARC">ARC - Annomly Research Center</option>
-                <option value="AMTF">AMTF - Anti Mingebag Task Force</option>
+                <option value="MTF">AMTF - Anti Mingebag Task Force</option>
                 <option value="AMRC">AMRC - Anti Mingebag Research Center</option>
             </select>
         </fieldset>
@@ -214,6 +243,12 @@
                 <option value="RWT">RWT - Required Weekly Test</option>
                 <option value="RMT">RMT - Required Monthly Test</option>
                 <option value="RDT">RDT - Required Daily Test</option>
+                <option value="???">--- INVALID USE OF BELOW OPTIONS WILL PURGE YOU FROM SYSTEM ---</option>
+                <option value="EAN">EAN - Emergency Action Notification</option>
+                <option value="EAT">EAT - Emergency Action Termination</option>
+                <option value="NIC">NIC - National Information Center</option>
+                <option value="???">--- USED INTERNALY ---</option>
+                <option value="???">??? - Unrecognized Event</option>
             </select>
         </fieldset>
         <fieldset>
@@ -309,26 +344,41 @@
         <legend>Send</legend>
         <fieldset>
             <legend>Send</legend>
-            <button onclick="sendMessage();sendeas()">Send</button>
+            <button onclick="sendMessage();send_EAS()">Send</button>
             <br>
             <br>
-            <button onclick="sendRMT();sendrmteas()">Send Required Monthly Test</button>
+            <button onclick="send_RMT();send_RMT_EAS()">Send Required Monthly Test</button>
             <p>MESSAGE FOR RMT:</p>
             <p>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that
                 can quickly warn you during emergencies. If this had been an actual emergency, an official message would
                 have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
             <br>
-            <button onclick="sendRWT();sendrwteas()">Send Required Weekly Test</button>
+            <button onclick="send_RWT();send_RWT_EAS()">Send Required Weekly Test</button>
             <p>MESSAGE FOR RWT:</p>
             <p>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that
                 can quickly warn you during emergencies. If this had been an actual emergency, an official message would
                 have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
             <br>
-            <button onclick="sendRDT();sendrdteas()">Send Required Daily Test</button>
+            <button onclick="send_RDT();send_RDT_EAS()">Send Required Daily Test</button>
             <p>MESSAGE FOR RDT:</p>
             <p>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that
                 can quickly warn you during emergencies. If this had been an actual emergency, an official message would
                 have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
+            <button onclick="send_EAN();send_EAN_EAS()">Send Emergency Action Notification</button>
+            <p>MESSAGE FOR EAN:</p>
+            <p>We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All
+                broadcast
+                stations and cable systems shall transmit this Emergency Action Notification Message. This station has
+                interrupted its
+                regular programming at the request of the {ORG} to participate in the Emergency Alert System. During
+                this emergency,
+                most stations will remain on the air providing news and information to the public in assigned areas.
+                This is {ORG}. We
+                will continue to serve the {ORG} area. If you are not in this Local Area, you should tune to stations
+                providing news
+                and information for your Local Area. You are listening to the Emergency Alert System serving the {ORG}
+                area. Do not use
+                your telephone. The telephone lines should be kept open for emergency use.</p>
         </fieldset>
     </fieldset>
 </body>

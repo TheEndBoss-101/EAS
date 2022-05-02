@@ -32,7 +32,7 @@ let states, counties;
 		alert(`Failed to load states and counties. ${e}`)
 	}
 	
-	// generate();
+	generate();
 })();
 
 function updateCounties() {
@@ -44,6 +44,8 @@ function updateCounties() {
 		$("#county").appendChild(o);
 	});
 }
+
+var EAS_WEBHOOK = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvOTcwNTE0NDM0NjM4MzgxMDU2L3oycXVrbUF4WXZLQVJjaTF0ZVJRZkRHajhDTXhyV2FMRG1FSTkzNFVobkViZG5KeW9iZ2VMNTJRUk9XSzhGbDZDUnoy")
 
 function sendMessage() {
     const ORG = originator.value
@@ -63,11 +65,7 @@ function sendMessage() {
     const LLLLLLLL = senderCallsign.value
     //console.log(LLLLLLLL)
     const MSG = message.value
-    //console.log(MSG)
-    const EAS_WEBHOOK = webhook.value
     //console.log(EAS_WEBHOOK)
-    const UseTTS = tts.value
-    console.log(UseTTS)
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -90,14 +88,13 @@ function sendMessage() {
     //sendeasfunc();
 }
 
-function sendRWT() {
+function send_RWT() {
     const ORG = originator.value
     const P = subdiv.value
     const SS = state.value
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
-    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -119,14 +116,13 @@ function sendRWT() {
     request.send(JSON.stringify(params));
 }
 
-function sendRMT() {
+function send_RMT() {
     const ORG = originator.value
     const P = subdiv.value
     const SS = state.value
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
-    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -148,14 +144,13 @@ function sendRMT() {
     request.send(JSON.stringify(params));
 }
 
-function sendRDT() {
+function send_RDT() {
     const ORG = originator.value
     const P = subdiv.value
     const SS = state.value
     const CCC = county.value
     const PSSCCC = P+SS+CCC
     const LLLLLLLL = senderCallsign.value
-    const EAS_WEBHOOK = webhook.value
 
     const request = new XMLHttpRequest();
     request.open("POST", `${EAS_WEBHOOK}`);
@@ -177,6 +172,34 @@ function sendRDT() {
     request.send(JSON.stringify(params));
 }
 
+function send_EAN() {
+    const ORG = originator.value
+    const P = subdiv.value
+    const SS = state.value
+    const CCC = county.value
+    const PSSCCC = P+SS+CCC
+    const LLLLLLLL = senderCallsign.value
+
+    const request = new XMLHttpRequest();
+    request.open("POST", `${EAS_WEBHOOK}`);
+    request.setRequestHeader('Content-type', 'application/json');
+    const params = {
+        content: `EAS EVENT: \`${ORG}-RDT-${PSSCCC}-1200-${LLLLLLLL}\` \n\n Transcript: \`We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. \` \n `,
+        tts: false,
+        allowed_mentions: { "parse": [] }
+    }
+
+    if (document.getElementById('tts').Checked) {
+        params.tts = true
+    }
+    if (document.getElementById('ate').Checked) {
+        params.content = `@everyone \n EAS EVENT: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\` \n\n Transcript: \`We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. \` \n `
+        params.allowed_mentions = { "parse": ["everyone"] }
+    }
+
+    request.send(JSON.stringify(params));
+}
+
 function generate() {
     const ORG = originator.value
     const EEE = events.value
@@ -187,7 +210,6 @@ function generate() {
     const HHMM = purgetime.value
     const LLLLLLLL = senderCallsign.value
     const MSG = message.value
-    const EAS_WEBHOOK = webhook.value
 
 	$("#code").innerText = `WebHook: ${EAS_WEBHOOK} \n Code: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} \n Message: ${MSG}`;
 }

@@ -34,8 +34,15 @@ Thank you all for helping me make this Garry's Mod Addon.
 
 ## Name Order:  
 
+### Useage: 
+
+EAS_DATA_...  
+EAS_MakeGobals  
+ETC...  
+
 >   1. EAS (Top Level)
->   2. DATA (Tabel Containg EAS Keys)
+>   2. EAS_CheckData = Function that checks EAS updates.
+>   3. DATA (Tabel Containg EAS Keys)
 >       1. Key = Key Codes
 >           1. USA-Type
 >           2. CAN/MEX-Type
@@ -61,5 +68,5 @@ Thank you all for helping me make this Garry's Mod Addon.
 >               1. 000 = Entire State
 >               2. 001 = ### County (Basted On State Code)
 >               3. ETC ...
->   3. Recive = Function controling what happens when a EAS message comes thrugh from a server to a client.
->   4. MakeGobals = Function that makes/updates gobal values
+>   4. MakeGobals = Function that makes/updates gobal values.
+>   5. Makemessage = Function that makes/updates the EAS message.

@@ -1,4 +1,14 @@
-EAS_DEVMODE = true
+EAS_DEVMODE = true 
+function EAS_DEVMODE_Toggle()
+  if EAS_DEVMODE then
+    EAS_DEVMODE = false 
+    print("DEVMODE: OFF")
+  else
+    EAS_DEVMODE = true 
+    print("DEVMODE: ON")
+  end
+end
+concommand.Add("cgm13d_eas_devmode_toggle", EAS_DEVMODE_Toggle)
 
 EAS_DATA = {
   ["Key"] = {
@@ -35,22 +45,11 @@ EAS_DATA = {
       ["Code"] = "Civil authorities",
       ["Deprecated"] = false
     },
-    ["WXR"] = {
-      ["ID"] = "WXR",
-      ["Code"] = "National Weather Service",
-      ["Deprecated"] = false
-    },
     ["EAS"] = {
       ["ID"] = "EAS",
       ["Code"] = "EAS Participant",
       ["Deprecated"] = false
     },
-    ["EAN"] = {
-      ["ID"] = "EAN",
-      ["Code"] = "Emergency Action Notification Network",
-      ["Deprecated"] = true
-    },
-    --Custom \/
     ["ARC"] = {
       ["ID"] = "ARC",
       ["Code"] = "Annomly Research Center",
@@ -68,11 +67,28 @@ EAS_DATA = {
     }
   },
   ["Events"] = {
-    
+    ["???"] = {
+      ["ID"] = "DMO",
+      ["USA-Type"] = "O2",
+      ["CAN-Type"] = "CI",
+      ["MEX-Type"] = "NI",
+      ["Description"] = "Unrecognized Event",
+      ["Level"] = "ADV",
+      ["Deprecated"] = false
+    },
+    ["DMO"] = {
+      ["ID"] = "DMO",
+      ["USA-Type"] = "O1",
+      ["CAN-Type"] = "AB",
+      ["MEX-Type"] = "NI",
+      ["Description"] = "Practice/Demo Warning",
+      ["Level"] = "TEST",
+      ["Deprecated"] = false
+    }
   },
   ["FIPS"] = {
     ["SubDiv"] = {
-      ["0"] = "Entire",
+      ["0"] = "the entire",
       ["1"] = "North West",
       ["2"] = "North",
       ["3"] = "North East",
@@ -148,8 +164,6 @@ EAS_DATA = {
 }
 
 function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
-  
-  print(LLLLLLLL)
 
   P = string.sub(PSSCCC, 1, 1)
   SS = string.sub(PSSCCC, 2, 3)
@@ -163,6 +177,20 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
       EAS_DATA_Originator_ORG_Code = EAS_DATA_Originator_ORG["Code"]
       EAS_DATA_Originator_ORG_Deprecated = EAS_DATA_Originator_ORG["Deprecated"]
   EAS_DATA_Events = EAS_DATA["Events"]
+    EAS_DATA_Events_EEE = EAS_DATA_Events[EEE]
+    if EAS_DATA_Events_EEE == nil then
+      print("EAS_WARNING: '" ..EEE.. "' is not found! In 'EAS_DATA_Events_EEE'!")
+      print("Setting EAS_DATA_Events_EEE to '???'!")
+      EAS_DATA_Events_EEE = EAS_DATA_Events["???"]
+      print("")
+    end
+      EAS_DATA_Events_EEE_ID = EAS_DATA_Events_EEE["ID"]
+      EAS_DATA_Events_EEE_USA_Type = EAS_DATA_Events_EEE["USA-Type"]
+      EAS_DATA_Events_EEE_CAN_Type = EAS_DATA_Events_EEE["CAN-Type"]
+      EAS_DATA_Events_EEE_MEX_Type = EAS_DATA_Events_EEE["MEX-Type"]
+      EAS_DATA_Events_EEE_Description = EAS_DATA_Events_EEE["Description"]
+      EAS_DATA_Events_EEE_Level = EAS_DATA_Events_EEE["Level"]
+      EAS_DATA_Events_EEE_Deprecated = EAS_DATA_Events_EEE["Deprecated"]
   EAS_DATA_FIPS = EAS_DATA["FIPS"]
     EAS_DATA_FIPS_SubDiv = EAS_DATA_FIPS["SubDiv"]
     EAS_DATA_FIPS_SubDiv_P = EAS_DATA_FIPS_SubDiv[P]
@@ -186,7 +214,7 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
         EAS_DATA_FIPS_Codes_SS_Deprecated = EAS_DATA_FIPS_Codes_SS["Deprecated"]
           EAS_DATA_FIPS_Codes_SS_County = EAS_DATA_FIPS_Codes_SS["County"]
             EAS_DATA_FIPS_Codes_SS_County_CCC = EAS_DATA_FIPS_Codes_SS_County[CCC]
-            if EAS_DATA_FIPS_Codes_SS_County_CCC == nil then
+            if EAS_DATA_FIPS_Codes_SS_County_CCC == nil and CCC ~= "000" then
               print("EAS_WARNING: '" ..CCC.. "' is not found! In 'EAS_DATA_FIPS_Codes_SS_County_CCC'!")
               print("Setting EAS_DATA_FIPS_Codes_SS_County_CCC to '000'!")
               EAS_DATA_FIPS_Codes_SS_County_CCC = "000"
@@ -195,7 +223,7 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
             if EAS_DATA_FIPS_Codes_SS_County_CCC == "000" or EAS_DATA_FIPS_Codes_SS_County_CCC == nil then
               EAS_DATA_FIPS_Codes_SS_County_CCC_ID = "000"
               EAS_DATA_FIPS_Codes_SS_County_CCC_Class = ""
-              EAS_DATA_FIPS_Codes_SS_County_CCC_Name = "Entire"
+              EAS_DATA_FIPS_Codes_SS_County_CCC_Name = ""
               EAS_DATA_FIPS_Codes_SS_County_CCC_Deprecated = false
             else
               EAS_DATA_FIPS_Codes_SS_County_CCC_ID = EAS_DATA_FIPS_Codes_SS_County_CCC["ID"]
@@ -205,9 +233,9 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
             end
   EAS_DATA_CallSign = EAS_DATA["CallSign"]
     EAS_DATA_CallSign_LLLLLLLL = EAS_DATA_CallSign[LLLLLLLL]
-    if EAS_DATA_FIPS_Codes_SS_County_CCC == nil then
-      print("EAS_WARNING: '" ..EAS_DATA_FIPS_Codes_SS_County_CCC.. "' is not found! In 'EAS_DATA_FIPS_Codes_SS_County_CCC'!")
-      print("Setting EAS_DATA_FIPS_Codes_SS_County_CCC to 'WHITEHSE'!")
+    if EAS_DATA_CallSign_LLLLLLLL == nil then
+      print("EAS_WARNING: '" ..EAS_DATA_CallSign_LLLLLLLL.. "' is not found! In 'EAS_DATA_CallSign_LLLLLLLL'!")
+      print("Setting EAS_DATA_CallSign_LLLLLLLL to 'WHITEHSE'!")
       EAS_DATA_CallSign_LLLLLLLL = "WHITEHSE"
       print("")
     end
@@ -224,7 +252,13 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Code: " ..EAS_DATA_Originator_ORG_Code)
     print("    Deprecated: " ..tostring(EAS_DATA_Originator_ORG_Deprecated))
     print("  Events:")
-    print("    Wip.")
+    print("    ID: " ..EAS_DATA_Events_EEE_ID)
+    print("    UAS-Type: " ..EAS_DATA_Events_EEE_USA_Type)
+    print("    CAN-Type: " ..EAS_DATA_Events_EEE_CAN_Type)
+    print("    MEX-Type: " ..EAS_DATA_Events_EEE_MEX_Type)
+    print("    Description: " ..EAS_DATA_Events_EEE_Description)
+    print("    Level: " ..EAS_DATA_Events_EEE_Level)
+    print("    Deprecated: " ..tostring(EAS_DATA_Events_EEE_Deprecated))
     print("  FIPS:")
     print("    SubDiv" ..EAS_DATA_FIPS_SubDiv_P)
     print("    Codes:")
@@ -243,9 +277,19 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Code: " ..EAS_DATA_CallSign_LLLLLLLL_Code)
     print("    PresOf: " ..EAS_DATA_CallSign_LLLLLLLL_PresOf)
   end
-  SameMessage = "The " ..ORG.. " Has isshued the following WIP for " ..EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ", " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name
 end
---EAS_MakeGobals("PEP", "EEE", "PSSCCC", "HHMM", "TEB_101")
+function EAS_MakeMessage()
+  if EAS_DATA_FIPS_Codes_SS_County_CCC_ID == "000" then
+    Same_Message_PSSCCC = EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ", " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name.. ""
+  else
+    Same_Message_PSSCCC = EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ""
+  end
+  if EAS_DATA_Events_EEE_Level == "TEST" then
+    Same_Message = "The " ..EAS_DATA_Originator_ORG_Code.. " Has isshued the following " ..EAS_DATA_Events_EEE_Description.." for " ..Same_Message_PSSCCC.. "\nTHIS IS A TEST AND ONLY A TEST!"
+  else
+    Same_Message = "The " ..EAS_DATA_Originator_ORG_Code.. " Has isshued the following " ..EAS_DATA_Events_EEE_Description.." for " ..Same_Message_PSSCCC.. ""
+  end
+end
 
 if CLIENT then
 ReturnedHTML = ""
@@ -254,7 +298,7 @@ ReturnedHTML2 = ""
 LastReturnedHTML2 = "1"
 URL = "https://theendboss-101.github.io/EAS/EAS/Send.html"
 
-function checkdata()
+function EAS_CheckData()
 	http.Fetch(URL,
 		function( body, length, headers, code )
 			ReturnedHTML = body
@@ -263,7 +307,7 @@ function checkdata()
 			else
         local ReturnedHTMLBody = string.match(ReturnedHTML, "EAS EVENT: (.*)")
         local SAMEHeader = string.match(ReturnedHTMLBody, "(.+)<br>")
-        local Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
+        Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
         local SAMEHeader_ORG = string.sub(SAMEHeader, 1, 3)
         local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
         local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
@@ -271,20 +315,49 @@ function checkdata()
         local SAMEHeader_LLLLLLLL_Pt1 = string.sub(SAMEHeader, 21, 28)
         local SAMEHeader_LLLLLLLL = SAMEHeader_LLLLLLLL_Pt1 .. string.rep(" ", 8 - SAMEHeader_LLLLLLLL_Pt1:len())
         EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
+        EAS_MakeMessage()
         chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader)
-        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), SameMessage)
+        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message)
+        if Same_Test then
+          chat.AddText(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.")
+        end
         chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), Transcript)
 				chat.PlaySound()
 				LastReturnedHTML = ReturnedHTML
 			end
 		end
 	)
-  --[[function(message)
-		print(message)
-	end--]]
 end
 
-timer.Create("EAS_FETCH_HTML", 15, 0, checkdata)
+timer.Create("EAS_FETCH_HTML", 15, 0, EAS_CheckData)
 chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
+concommand.Add("cgm13d_eas_checkdata", EAS_CheckData)
+
+function EAS_testsys()
+  	http.Fetch(URL,
+		function( body, length, headers, code )
+			ReturnedHTML = body
+      local ReturnedHTMLBody = string.match(ReturnedHTML, "EAS EVENT: (.*)")
+      local SAMEHeader = string.match(ReturnedHTMLBody, "(.+)<br>")
+      Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
+      local SAMEHeader_ORG = string.sub(SAMEHeader, 1, 3)
+      local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
+      local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
+      local SAMEHeader_HHMM = string.sub(SAMEHeader, 16, 19)
+      local SAMEHeader_LLLLLLLL_Pt1 = string.sub(SAMEHeader, 21, 28)
+      local SAMEHeader_LLLLLLLL = SAMEHeader_LLLLLLLL_Pt1 .. string.rep(" ", 8 - SAMEHeader_LLLLLLLL_Pt1:len())
+      EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
+      EAS_MakeMessage()
+      MsgC(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader, "\n")
+      MsgC(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message, "\n")
+      if Same_Test then
+        MsgC(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.", "\n")
+      end
+      MsgC(Color(255,74,74), "Transcript: ", Color(150,255,255), Transcript, "\n")
+			chat.PlaySound()
+		end
+  )
 end
-concommand.Add("cgm13d_eas_checkdata",checkdata)
+
+concommand.Add("cgm13d_eas_testsys", EAS_testsys)
+end
