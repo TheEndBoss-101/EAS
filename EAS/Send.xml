@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org></org>
-    <event></event>
+    <org>EAS</org>
+    <event>DMO</event>
     <pssccc>
-        <p></P>
-        <ss></ss>
-        <ccc></ccc>
+        <p>0</p>
+        <ss>00</ss>
+        <ccc>000</ccc>
     </pssccc>
-    <hhmm></hhmm>
-    <llllllll></llllllll>
-    <message></message>
+    <hhmm>HHMM</hhmm>
+    <llllllll>LLLLLLLL</llllllll>
+    <message>Message</message>
 </alert>
