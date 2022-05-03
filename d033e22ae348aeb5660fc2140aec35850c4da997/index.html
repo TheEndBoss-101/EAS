@@ -27,7 +27,7 @@
     </script>
     <script type="text/javascript" defer>
         async function sendeas() {
-            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -49,10 +49,10 @@
             const LLLLLLLL = senderCallsign.value
             const MSG = message.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL} <br> Transcript: ${MSG}`);
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
 
-            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -67,7 +67,7 @@
         }
 
         async function send_RMT_EAS() {
-            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -86,10 +86,10 @@
             const PSSCCC = P + SS + CCC
             const LLLLLLLL = senderCallsign.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-RMT-${PSSCCC}-1200-${LLLLLLLL} <br> Transcript: This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.`);
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RMT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
             console.log(gitcontent)
 
-            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -104,7 +104,7 @@
         }
 
         async function send_RWT_EAS() {
-            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -122,10 +122,10 @@
             const PSSCCC = P + SS + CCC
             const LLLLLLLL = senderCallsign.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-RWT-${PSSCCC}-1200-${LLLLLLLL} <br> Transcript: This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.`);
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RWT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
             console.log(gitcontent)
 
-            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -140,7 +140,7 @@
         }
 
         async function send_RDT_EAS() {
-            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -158,10 +158,10 @@
             const PSSCCC = P + SS + CCC
             const LLLLLLLL = senderCallsign.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-RDT-${PSSCCC}-1200-${LLLLLLLL} <br> Transcript: This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.`);
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RDT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
             console.log(gitcontent)
 
-            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -176,7 +176,7 @@
         }
 
         async function send_EAN_EAS() {
-            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',
@@ -193,11 +193,12 @@
             const CCC = county.value
             const PSSCCC = P + SS + CCC
             const LLLLLLLL = senderCallsign.value
+            const HHMM = purgetime.value
 
-            var gitcontent = btoa(`EAS EVENT: ${ORG}-EAN-${PSSCCC}-1200-${LLLLLLLL} <br> Transcript: We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. Do not spam the ${ORG} Discord. The Discord channels should be kept open for emergency use. `);
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>EAN</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. Do not spam the ${ORG} Discord. The Discord channels should be kept open for emergency use.</message>\n</alert>`)
             console.log(gitcontent)
 
-            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.html', {
+            await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
                 path: 'EAS/Send.html',

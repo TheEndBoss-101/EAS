@@ -1,14 +1,4 @@
 EAS_DEVMODE = true 
-function EAS_DEVMODE_Toggle()
-  if EAS_DEVMODE then
-    EAS_DEVMODE = false 
-    print("DEVMODE: OFF")
-  else
-    EAS_DEVMODE = true 
-    print("DEVMODE: ON")
-  end
-end
-concommand.Add("cgm13d_eas_devmode_toggle", EAS_DEVMODE_Toggle)
 
 EAS_DATA = {
   ["Key"] = {
@@ -190,7 +180,7 @@ EAS_DATA = {
   }
 }
 
-function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
+function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
 
   P = string.sub(PSSCCC, 1, 1)
   SS = string.sub(PSSCCC, 2, 3)
@@ -244,7 +234,7 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
             if EAS_DATA_FIPS_Codes_SS_County_CCC == nil and CCC ~= "000" then
               print("EAS_WARNING: '" ..CCC.. "' is not found! In 'EAS_DATA_FIPS_Codes_SS_County_CCC'!")
               print("Setting EAS_DATA_FIPS_Codes_SS_County_CCC to '000'!")
-              EAS_DATA_FIPS_Codes_SS_County_CCC = "000"
+              EAS_DATA_FIPS_Codes_SS_County_CCC = EAS_DATA_FIPS_Codes_SS_County["000"]
               print("")
             end
             if EAS_DATA_FIPS_Codes_SS_County_CCC == "000" or EAS_DATA_FIPS_Codes_SS_County_CCC == nil then
@@ -261,9 +251,9 @@ function EAS_MakeGobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
   EAS_DATA_CallSign = EAS_DATA["CallSign"]
     EAS_DATA_CallSign_LLLLLLLL = EAS_DATA_CallSign[LLLLLLLL]
     if EAS_DATA_CallSign_LLLLLLLL == nil then
-      print("EAS_WARNING: '" ..EAS_DATA_CallSign_LLLLLLLL.. "' is not found! In 'EAS_DATA_CallSign_LLLLLLLL'!")
+      print("EAS_WARNING: '" ..LLLLLLLL.. "' is not found! In 'EAS_DATA_CallSign_LLLLLLLL'!")
       print("Setting EAS_DATA_CallSign_LLLLLLLL to 'WHITEHSE'!")
-      EAS_DATA_CallSign_LLLLLLLL = "WHITEHSE"
+      EAS_DATA_CallSign_LLLLLLLL = EAS_DATA_CallSign["WHITEHSE"]
       print("")
     end
       EAS_DATA_CallSign_LLLLLLLL_ID = EAS_DATA_CallSign_LLLLLLLL["ID"]
@@ -311,11 +301,6 @@ function EAS_MakeMessage()
   else
     Same_Message_PSSCCC = EAS_DATA_FIPS_SubDiv_P.. " " ..EAS_DATA_FIPS_Codes_SS_Name.. ""
   end
-  if EAS_DATA_Events_EEE_Level == "TEST" then
-    Same_Message = "The " ..EAS_DATA_Originator_ORG_Code.. " Has isshued the following " ..EAS_DATA_Events_EEE_Description.." for " ..Same_Message_PSSCCC.. "\nTHIS IS A TEST AND ONLY A TEST!"
-  else
-    Same_Message = "The " ..EAS_DATA_Originator_ORG_Code.. " Has isshued the following " ..EAS_DATA_Events_EEE_Description.." for " ..Same_Message_PSSCCC.. ""
-  end
 end
 
 if CLIENT then
@@ -325,66 +310,43 @@ ReturnedHTML2 = ""
 LastReturnedHTML2 = "1"
 URL = "https://theendboss-101.github.io/EAS/EAS/Send.html"
 
-function EAS_CheckData()
-	http.Fetch(URL,
-		function( body, length, headers, code )
-			ReturnedHTML = body
-			if ReturnedHTML == LastReturnedHTML then
-				if true then end
-			else
-        local ReturnedHTMLBody = string.match(ReturnedHTML, "EAS EVENT: (.*)")
-        local SAMEHeader = string.match(ReturnedHTMLBody, "(.+)<br>")
-        Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
-        local SAMEHeader_ORG = string.sub(SAMEHeader, 1, 3)
-        local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
-        local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
-        local SAMEHeader_HHMM = string.sub(SAMEHeader, 16, 19)
-        local SAMEHeader_LLLLLLLL_Pt1 = string.sub(SAMEHeader, 21, 28)
-        local SAMEHeader_LLLLLLLL = SAMEHeader_LLLLLLLL_Pt1 .. string.rep(" ", 8 - SAMEHeader_LLLLLLLL_Pt1:len())
-        EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
+function EAS_CHECK_XML()
+  URL = "https://theendboss-101.github.io/EAS/EAS/Send.xml"
+  http.Fetch(URL,
+    function(body, length, headers, code)
+      ReturnedHTML = body
+		  if ReturnedHTML == LastReturnedHTML then
+			  if true then end
+		  else
+        local EAS_XML_Alert = string.match(body, "<alert>(.+)</alert>")
+        local EAS_XML_Org = string.match(EAS_XML_Alert, "<org>(.+)</org>")
+        local EAS_XML_Event = string.match(EAS_XML_Alert, "<event>(.+)</event>")
+        local EAS_XML_PSSCCC = string.match(EAS_XML_Alert, "<pssccc>(.+)</pssccc>")
+        local EAS_XML_PSSCCC_P = string.match(EAS_XML_Alert, "<p>(.+)</p>")
+        local EAS_XML_PSSCCC_SS = string.match(EAS_XML_Alert, "<ss>(.+)</ss>")
+        local EAS_XML_PSSCCC_CCC = string.match(EAS_XML_Alert, "<ccc>(.+)</ccc>")
+        local EAS_XML_PSSCCC_Full = EAS_XML_PSSCCC_P .. EAS_XML_PSSCCC_SS .. EAS_XML_PSSCCC_CCC
+        local EAS_XML_HHMM = string.match(EAS_XML_Alert, "<hhmm>(.+)</hhmm>")
+        local EAS_XML_LLLLLLLL = string.match(EAS_XML_Alert, "<llllllll>(.+)</llllllll>")
+        local EAS_XML_LLLLLLLL_Fill = EAS_XML_LLLLLLLL .. string.rep(" ", 8 - EAS_XML_LLLLLLLL:len())
+        local EAS_XML_SAME_HEADER = EAS_XML_Org.. "-" ..EAS_XML_Event.. "-" ..EAS_XML_PSSCCC_Full.. "-" ..EAS_XML_HHMM.. "-" ..EAS_XML_LLLLLLLL_Fill
+        local EAS_XML_Message = string.match(EAS_XML_Alert, "<message>(.+)</message>")
+        EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL_Fill)
         EAS_MakeMessage()
-        chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader)
-        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message)
-        if Same_Test then
-          chat.AddText(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.")
+        --Make Send Message.
+        chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), EAS_XML_SAME_HEADER, "\n")
+        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message, "\n")
+        if EAS_DATA_Events_EEE_Level == "TEST" then
+          chat.AddText(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.", "\n")
         end
-        chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), Transcript)
-				chat.PlaySound()
-				LastReturnedHTML = ReturnedHTML
-			end
-		end
-	)
-end
-
-timer.Create("EAS_FETCH_HTML", 15, 0, EAS_CheckData)
-chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
-concommand.Add("cgm13d_eas_checkdata", EAS_CheckData)
-
-function EAS_testsys()
-  	http.Fetch(URL,
-		function( body, length, headers, code )
-			ReturnedHTML = body
-      local ReturnedHTMLBody = string.match(ReturnedHTML, "EAS EVENT: (.*)")
-      local SAMEHeader = string.match(ReturnedHTMLBody, "(.+)<br>")
-      Transcript = string.match(ReturnedHTMLBody, "Transcript: (.*)")
-      local SAMEHeader_ORG = string.sub(SAMEHeader, 1, 3)
-      local SAMEHeader_EEE = string.sub(SAMEHeader, 5, 7)
-      local SAMEHeader_PSSCCC = string.sub(SAMEHeader, 9, 14)
-      local SAMEHeader_HHMM = string.sub(SAMEHeader, 16, 19)
-      local SAMEHeader_LLLLLLLL_Pt1 = string.sub(SAMEHeader, 21, 28)
-      local SAMEHeader_LLLLLLLL = SAMEHeader_LLLLLLLL_Pt1 .. string.rep(" ", 8 - SAMEHeader_LLLLLLLL_Pt1:len())
-      EAS_MakeGobals(SAMEHeader_ORG, SAMEHeader_EEE, SAMEHeader_PSSCCC, SAMEHeader_HHMM, SAMEHeader_LLLLLLLL)
-      EAS_MakeMessage()
-      MsgC(Color(255,74,74), "Same Header: ", Color(150,255,255), SAMEHeader, "\n")
-      MsgC(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message, "\n")
-      if Same_Test then
-        MsgC(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.", "\n")
+        chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), EAS_XML_Message, "\n")
+        chat.PlaySound()
+        LastReturnedHTML = ReturnedHTML
       end
-      MsgC(Color(255,74,74), "Transcript: ", Color(150,255,255), Transcript, "\n")
-			chat.PlaySound()
-		end
+    end
   )
 end
-
-concommand.Add("cgm13d_eas_testsys", EAS_testsys)
+concommand.Add("eas_check_xml", EAS_CHECK_XML)
+timer.Create("EAS_CHECK_XML", 15, 0, EAS_CHECK_XML)
+chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
 end
