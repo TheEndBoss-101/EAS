@@ -5,49 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARC EAS</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <title>GM13B - Emergency Alert System</title>
+    <!-- Favicon -->
     <link rel="shortcut icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
-    <style>
-        pre {
-            display: inline-block;
-        }
-    </style>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Inports -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js?v=2.0.0"></script>
+    <!-- Github -->
     <script type="module" defer>
         import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
         var authtoken = atob("Z2hwX1pRWjIzMlBVcEFtc2FWZHlSQ29wc1RURHFnYnN3QzNUNEl6Tw==")
         window.octokit = new Octokit({ auth: `${authtoken}` });
     </script>
     <script type="text/javascript" defer>
-        async function sendeas() {
+        async function Send_EAS_Message_Github() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
             })
             console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
+
             var gitsha = getfromgit.data["sha"]
             console.log(gitsha);
 
-            const ORG = originator.value
-            console.log(ORG)
-            const EEE = events.value
-            const P = subdiv.value
-            const SS = state.value
-            const CCC = county.value
+            const ORG = Originator.value
+            const EEE = Events.value
+            const P = SubDiv.value
+            const SS = State.value
+            const CCC = County.value
             const PSSCCC = P + SS + CCC
-            const HHMM = purgetime.value
-            const LLLLLLLL = senderCallsign.value
-            const MSG = message.value
+            const HHMM = PurgeTime.value
+            const LLLLLLLL = SenderCallSign.value
+            const MSG = Message.value
 
             var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
@@ -55,215 +49,275 @@
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
                 message: 'SEND EAS MESSAGE',
                 committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
+                    name: 'EAS_SYSTEM',
+                    email: 'eassysteb101@gmail.com'
                 },
                 content: `${gitcontent}`,
                 sha: `${gitsha}`
             })
         }
 
-        async function send_RMT_EAS() {
+        async function Send_RDT_Message_Github() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
             })
             console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
+
             var gitsha = getfromgit.data["sha"]
             console.log(gitsha);
 
-            const ORG = originator.value
-            console.log(ORG)
-            const P = subdiv.value
-            const SS = state.value
-            const CCC = county.value
+            const ORG = Originator.value
+            const EEE = "RDT"
+            const P = SubDiv.value
+            const SS = State.value
+            const CCC = County.value
             const PSSCCC = P + SS + CCC
-            const LLLLLLLL = senderCallsign.value
+            const HHMM = "1200"
+            const LLLLLLLL = SenderCallSign.value
+            const MSG = "This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System."
 
-            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RMT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
 
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
-                message: 'SEND EAS RMT MESSAGE',
+                path: 'EAS/Send.xml',
+                message: 'SEND EAS MESSAGE',
                 committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
+                    name: 'EAS_SYSTEM',
+                    email: 'eassysteb101@gmail.com'
                 },
                 content: `${gitcontent}`,
                 sha: `${gitsha}`
             })
         }
 
-        async function send_RWT_EAS() {
+        async function Send_RWT_Message_Github() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
             })
             console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
+
             var gitsha = getfromgit.data["sha"]
             console.log(gitsha);
 
-            const ORG = originator.value
-            const P = subdiv.value
-            const SS = state.value
-            const CCC = county.value
+            const ORG = Originator.value
+            const EEE = "RWT"
+            const P = SubDiv.value
+            const SS = State.value
+            const CCC = County.value
             const PSSCCC = P + SS + CCC
-            const LLLLLLLL = senderCallsign.value
+            const HHMM = "1200"
+            const LLLLLLLL = SenderCallSign.value
+            const MSG = "This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System."
 
-            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RWT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
 
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
-                message: 'SEND EAS RWT MESSAGE',
+                path: 'EAS/Send.xml',
+                message: 'SEND EAS MESSAGE',
                 committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
+                    name: 'EAS_SYSTEM',
+                    email: 'eassysteb101@gmail.com'
                 },
                 content: `${gitcontent}`,
                 sha: `${gitsha}`
             })
         }
 
-        async function send_RDT_EAS() {
+        async function Send_RMT_Message_Github() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
             })
             console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
+
             var gitsha = getfromgit.data["sha"]
             console.log(gitsha);
 
-            const ORG = originator.value
-            const P = subdiv.value
-            const SS = state.value
-            const CCC = county.value
+            const ORG = Originator.value
+            const EEE = "RMT"
+            const P = SubDiv.value
+            const SS = State.value
+            const CCC = County.value
             const PSSCCC = P + SS + CCC
-            const LLLLLLLL = senderCallsign.value
+            const HHMM = "1200"
+            const LLLLLLLL = SenderCallSign.value
+            const MSG = "This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System."
 
-            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>RDT</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>1200</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>\n</alert>`)
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
 
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
-                message: 'SEND EAS RDT MESSAGE',
+                path: 'EAS/Send.xml',
+                message: 'SEND EAS MESSAGE',
                 committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
+                    name: 'EAS_SYSTEM',
+                    email: 'eassysteb101@gmail.com'
                 },
                 content: `${gitcontent}`,
                 sha: `${gitsha}`
             })
         }
 
-        async function send_EAN_EAS() {
+        async function Send_EAN_Message_Github() {
             var getfromgit = await window.octokit.request('GET /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
+                path: 'EAS/Send.xml',
             })
             console.log(getfromgit)
-            //var getfromgitJson = JSON.parse(getfromgit);
-            //console.log(getfromgitJson)
+
             var gitsha = getfromgit.data["sha"]
             console.log(gitsha);
 
-            const ORG = originator.value
-            const P = subdiv.value
-            const SS = state.value
-            const CCC = county.value
+            const ORG = Originator.value
+            const EEE = "EAN"
+            const P = SubDiv.value
+            const SS = State.value
+            const CCC = County.value
             const PSSCCC = P + SS + CCC
-            const LLLLLLLL = senderCallsign.value
-            const HHMM = purgetime.value
+            const HHMM = PurgeTime.value
+            const LLLLLLLL = SenderCallSign.value
+            const MSG = "We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. Do not spam the ${ORG} Discord. The Discord channels should be kept open for emergency use."
 
-            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>EAN</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All broadcast stations and cable systems shall transmit this Emergency Action Notification Message. This station has interrupted its regular programming at the request of the ${ORG} to participate in the Emergency Alert System.  During this emergency, most stations will remain on the air providing news and information to the public in assigned areas. This is ${ORG}. We will continue to serve the ${ORG} area. If you are not in this Local Area, you should tune to stations providing news and information for your Local Area. You are listening to the Emergency Alert System serving the ${ORG} area. Do not use your telephone. The telephone lines should be kept open for emergency use. Do not spam the ${ORG} Discord. The Discord channels should be kept open for emergency use.</message>\n</alert>`)
+            var gitcontent = btoa(`<?xml version="1.0" encoding="UTF-8"?>\n<alert>\n    <org>${ORG}</org>\n    <event>${EEE}</event>\n    <pssccc>\n        <p>${P}</p>\n        <ss>${SS}</ss>\n        <ccc>${CCC}</ccc>\n    </pssccc>\n    <hhmm>${HHMM}</hhmm>\n    <llllllll>${LLLLLLLL}</llllllll>\n    <message>${MSG}</message>\n</alert>`)
             console.log(gitcontent)
 
             await window.octokit.request('PUT /repos/TheEndBoss-101/EAS/contents/EAS/Send.xml', {
                 owner: 'TheEndBoss-101',
                 repo: 'EAS',
-                path: 'EAS/Send.html',
-                message: 'SEND EAS EAN MESSAGE',
+                path: 'EAS/Send.xml',
+                message: 'SEND EAS MESSAGE',
                 committer: {
-                    name: 'TheEndBoss-101',
-                    email: 'theendboss101@gmail.com'
+                    name: 'EAS_SYSTEM',
+                    email: 'eassysteb101@gmail.com'
                 },
                 content: `${gitcontent}`,
                 sha: `${gitsha}`
             })
         }
     </script>
-    <script src="./eas_main.js?version=5.0" defer></script>
 </head>
 
 <body>
-    <h1>EAS (Emergency Alert System) GM13 B Webhook.</h1>
-    <h2>V5.0</h2>
-    <h3>ADMIN</h3>
-    <a href="https://github.com/TheEndBoss-101/EAS" target="_BLANK">Github Repo</a>
+    <h1 id="header" class="center">GM13B - Emergency Alert System</h1>
+    <a href="#5">Jump to step 5.</a>
+    <a href="https://github.com/TheEndBoss-101/EAS">Github Repo</a>
+    <a href="https://theendboss-101.github.io/EAS/index.html">Back</a>
     <br>
-    <a href="../index.html">Back</a>
-    <br>
-    <br>
-    <fieldset>
-        <fieldset>
-            <legend>Settings - WIP</legend>
-            <input type="checkbox" id="tts" name="tts">
-            <label for="tts"> Use tts</label><br>
-            <input type="checkbox" id="ate" name="ate">
-            <label for="ate"> @everyone</label>
-        </fieldset>
-        <legend>Make</legend>
-        <fieldset>
-            <legend>Originator</legend>
-            <select id="originator" onchange="generate()">
-                <option value="PEP">PEP - Primary Entry Point System</option>
-                <option value="CIV">CIV - Civil authorities</option>
-                <option value="EAS" selected>EAS - Emergency Alert System participant</option>
-                <option value="ARC">ARC - Annomly Research Center</option>
-                <option value="MTF">AMTF - Anti Mingebag Task Force</option>
-                <option value="AMRC">AMRC - Anti Mingebag Research Center</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <legend>Event - Wip</legend>
-            <select id="events" onchange="generate()">
-                <option value="DMO" selected>DMO - Practice/Demo Warning</option>
-                <option value="RWT">RWT - Required Weekly Test</option>
-                <option value="RMT">RMT - Required Monthly Test</option>
-                <option value="RDT">RDT - Required Daily Test</option>
-                <option value="???">--- INVALID USE OF BELOW OPTIONS WILL PURGE YOU FROM SYSTEM ---</option>
-                <option value="EAN">EAN - Emergency Action Notification</option>
-                <option value="EAT">EAT - Emergency Action Termination</option>
-                <option value="NIC">NIC - National Information Center</option>
-                <option value="???">--- USED INTERNALY ---</option>
-                <option value="???">??? - Unrecognized Event</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <legend>Location</legend>
+    <form>
+        <fieldset id="1">
+            <legend><a href="#1">1. Set User Info</a></legend>
             <fieldset>
-                <legend>Area</legend>
-                <select id="subdiv" onchange="generate()">
+                <legend>Originator (Orig)</legend>
+                <!--label for="Originator">Originator (Orig) - </label-->
+                <select id="Originator" name="Originator">
+                    <option value="PEP">PEP - Primary Entry Point System</option>
+                    <option value="CIV">CIV - Civil authorities</option>
+                    <option value="EAS" selected>EAS - Emergency Alert System participant</option>
+                    <option value="ARC">ARC - Annomly Research Center</option>
+                    <option value="MTF">AMTF - Anti Mingebag Task Force</option>
+                    <option value="AMRC">AMRC - Anti Mingebag Research Center</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Sender Call Sign</legend>
+                <!--label for="SenderCallSign">Sender Call Sign - </label-->
+                <input type="text" id="SenderCallSign" maxlength="8" placeholder="WHITEHSE" />
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend id="2"><a href="#2">2. Set Event</a></legend>
+            <fieldset>
+                <legend>Event</legend>
+                <!--label for="Events">Events - </label-->
+                <select name="Event" id="Events">
+                    <option value="DMO" selected>DMO - Practice/Demo Warning</option>
+                    <option value="RWT">RWT - Required Weekly Test</option>
+                    <option value="RMT">RMT - Required Monthly Test</option>
+                    <option value="RDT">RDT - Required Daily Test</option>
+                    <option value="???">--- INVALID USE OF BELOW OPTIONS WILL PURGE YOU FROM SYSTEM ---</option>
+                    <option value="EAN">EAN - Emergency Action Notification</option>
+                    <option value="EAT">EAT - Emergency Action Termination</option>
+                    <option value="NIC">NIC - National Information Center</option>
+                    <option value="???">--- USED INTERNALY ---</option>
+                    <option value="???">??? - Unrecognized Event</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Settings</legend>
+                <label for="TTS">Text To Speach - </label>
+                <input id="TTS" type="checkbox">
+                <br>
+                <label for="AtEveryone">@everyone - </label>
+                <input id="AtEveryone" type="checkbox">
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend id="3"><a href="#3">3. Time</a></legend>
+            <fieldset>
+                <!--label for="PurgeTime">Purge time - </label-->
+                <legend>Purge time</legend>
+                <select id="PurgeTime">
+                    <option value="0000">0000</option>
+                    <option value="0015" selected>0015</option>
+                    <option value="0030">0030</option>
+                    <option value="0045">0045</option>
+                    <option value="0100">0100</option>
+                    <option value="0130">0130</option>
+                    <option value="0200">0200</option>
+                    <option value="0230">0230</option>
+                    <option value="0300">0300</option>
+                    <option value="0330">0330</option>
+                    <option value="0400">0400</option>
+                    <option value="0430">0430</option>
+                    <option value="0500">0500</option>
+                    <option value="0530">0530</option>
+                    <option value="0600">0600</option>
+                    <option value="0700">0700</option>
+                    <option value="0800">0800</option>
+                    <option value="0900">0900</option>
+                    <option value="1000">1000</option>
+                    <option value="1100">1100</option>
+                    <option value="1200">1200</option>
+                    <option value="1300">1300</option>
+                    <option value="1400">1400</option>
+                    <option value="1500">1500</option>
+                    <option value="1600">1600</option>
+                    <option value="1700">1700</option>
+                    <option value="1800">1800</option>
+                    <option value="1900">1900</option>
+                    <option value="2000">2000</option>
+                    <option value="2100">2100</option>
+                    <option value="2200">2200</option>
+                    <option value="2300">2300</option>
+                    <option value="2400">2400</option>
+                    <option value="4800">4800</option>
+                    <option value="9600">9600</option>
+                </select>
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend id="4"><a href="#4">4. Location</a></legend>
+            <fieldset>
+                <legend id="4A">4A. Area</legend>
+                <!--label for="SubDiv">Area - </label-->
+                <select id="SubDiv">
                     <option value="0" selected>Entire region</option>
                     <option value="1">Northwest</option>
                     <option value="2">North</option>
@@ -276,103 +330,58 @@
                     <option value="9">Southeast</option>
                 </select>
             </fieldset>
-            <fieldset>
-                <legend>State</legend>
-                <select id="state" onchange="updateCounties();generate()">
+            <fieldset id="4B">
+                <legend>4B. State</legend>
+                <!--label for="State">State - </label-->
+                <select id="State" onchange="Update_Counties()">
                     <option value="00">Loading...</option>
                 </select>
             </fieldset>
-            <fieldset>
-                <legend>County</legend>
-                <select id="county" onchange="generate()">
+            <fieldset id="4C">
+                <legend>4C. County</legend>
+                <!--label for="County">County - </label-->
+                <select id="County">
                     <option value="000">Loading...</option>
                 </select>
             </fieldset>
         </fieldset>
-        <fieldset>
-            <legend>Purge time (HHMM)</legend>
-            <select id="purgetime" onchange="generate()">
-                <option value="0000">0000</option>
-                <option value="0015" selected>0015</option>
-                <option value="0030">0030</option>
-                <option value="0045">0045</option>
-                <option value="0100">0100</option>
-                <option value="0130">0130</option>
-                <option value="0200">0200</option>
-                <option value="0230">0230</option>
-                <option value="0300">0300</option>
-                <option value="0330">0330</option>
-                <option value="0400">0400</option>
-                <option value="0430">0430</option>
-                <option value="0500">0500</option>
-                <option value="0530">0530</option>
-                <option value="0600">0600</option>
-                <option value="0700">0700</option>
-                <option value="0800">0800</option>
-                <option value="0900">0900</option>
-                <option value="1000">1000</option>
-                <option value="1100">1100</option>
-                <option value="1200">1200</option>
-                <option value="1300">1300</option>
-                <option value="1400">1400</option>
-                <option value="1500">1500</option>
-                <option value="1600">1600</option>
-                <option value="1700">1700</option>
-                <option value="1800">1800</option>
-                <option value="1900">1900</option>
-                <option value="2000">2000</option>
-                <option value="2100">2100</option>
-                <option value="2200">2200</option>
-                <option value="2300">2300</option>
-                <option value="2400">2400</option>
-                <option value="4800">4800</option>
-                <option value="9600">9600</option>
-            </select>
+        <fieldset id="5">
+            <legend><a href="#5">5. Message</a></legend>
+            <fieldset>
+                <legend>Message</legend>
+                <!--label for="Message">Message - </label-->
+                <textarea id="Message" placeholder="Message" rows="5" cols="60">Message</textarea>
+                <p class="warning">WARNING: No avable message with RDT, RWT, RMT, EAN</p>
+            </fieldset>
         </fieldset>
         <fieldset>
-            <legend>Sender Call Sign</legend>
-            <input type="text" id="senderCallsign" maxlength="8" onchange="generate()" placeholder="WHITEHSE" />
-        </fieldset>
-        <fieldset>
-            <legend>Message</legend>
-            <textarea id="message" placeholder="Message" rows="4" cols="50" onchange="generate()"></textarea>
-        </fieldset>
-    </fieldset>
-    </fieldset>
-    <fieldset>
-        <legend>Review</legend>
-        <fieldset>
-            <legend>Code</legend>
-            <div>
-                <textarea id="code" placeholder="{WAITING FOR USER INPUIT}" rows="4" cols="58" readonly></textarea>
-            </div>
-        </fieldset>
-    </fieldset>
-    <fieldset>
-        <legend>Send</legend>
-        <fieldset>
-            <legend>Send</legend>
-            <button onclick="sendMessage();send_EAS()">Send</button>
+            <legend id="#5"><a href="#5">5. Send</a></legend>
+            <button onclick="Send_EAS_Message_Discord();Send_EAS_Message_Github()">Send</button>
             <br>
             <br>
-            <button onclick="send_RMT();send_RMT_EAS()">Send Required Monthly Test</button>
-            <p>MESSAGE FOR RMT:</p>
-            <p>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that
-                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
-                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
-            <br>
-            <button onclick="send_RWT();send_RWT_EAS()">Send Required Weekly Test</button>
-            <p>MESSAGE FOR RWT:</p>
-            <p>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that
-                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
-                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
-            <br>
-            <button onclick="send_RDT();send_RDT_EAS()">Send Required Daily Test</button>
+            <button onclick="Send_RDT_Message_Discord();Send_RDT_Message_Github()">Send Required Daily Test
+                (RDT)</button>
             <p>MESSAGE FOR RDT:</p>
             <p>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that
                 can quickly warn you during emergencies. If this had been an actual emergency, an official message would
                 have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
-            <button onclick="send_EAN();send_EAN_EAS()">Send Emergency Action Notification</button>
+            <br>
+            <button onclick="Send_RWT_Message_Discord();Send_RWT_Message_Github()">Send Required Daily Test
+                (RWT)</button>
+            <p>MESSAGE FOR RDT:</p>
+            <p>This is a coordinated weekly test of the broadcast stations of your area. We are testing equipment that
+                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
+                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
+            <br>
+            <button onclick="Send_RMT_Message_Discord();Send_RMT_Message_Github()">Send Required Daily Test
+                (RMT)</button>
+            <p>MESSAGE FOR RDT:</p>
+            <p>This is a coordinated monthly test of the broadcast stations of your area. We are testing equipment that
+                can quickly warn you during emergencies. If this had been an actual emergency, an official message would
+                have followed the alert tone. This concludes this test of the Emergency Alert System.</p>
+            <br>
+            <button onclick="Send_EAN_Message_Discord();Send_EAN_Message_Github()">Send Emergency Action Notification
+                (EAN)</button>
             <p>MESSAGE FOR EAN:</p>
             <p>We interrupt our programming; this is a national emergency. This is an Emergency Action Notification. All
                 broadcast
@@ -388,7 +397,7 @@
                 area. Do not use
                 your telephone. The telephone lines should be kept open for emergency use.</p>
         </fieldset>
-    </fieldset>
+    </form>
 </body>
 
 </html>

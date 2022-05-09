@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/*
+    FILE: style.css
+    USE: EAS
+*/
+
+pre {
+    display: inline-block;
+}
+
+body {
+    background-color: lightyellow;
+}
+
+.center {
+    text-align: center;
+}
+
+.warning {
+    color: red;
+}

@@ -152,27 +152,27 @@ EAS_DATA = {
       ["Code"] = "White House",
       ["PresOf"] = "United States Of America"
     },
-    ["TEB_101 "] = {
+    ["TEB_101"] = {
       ["ID"] = "TEB_101",
       ["Code"] = "TheEndBoss_101",
       ["PresOf"] = "Emergency Alert System"
     },
-    ["MOBENIX "] = {
+    ["MOBENIX"] = {
       ["ID"] = "MOB",
       ["Code"] = "MOBENIX",
       ["PresOf"] = "A.R.C."
     },
-    ["MILO    "] = {
+    ["MILO"] = {
       ["ID"] = "MILO",
       ["Code"] = "Milo",
       ["PresOf"] = "A.M.T.F."
     },
-    ["FLUFFY  "] = {
+    ["FLUFFY"] = {
       ["ID"] = "FLUFFY",
       ["Code"] = "Fluffy",
       ["PresOf"] = ""
     },
-    ["CACHE   "] = {
+    ["CACHE"] = {
       ["ID"] = "CACHE",
       ["Code"] = "Cache",
       ["PresOf"] = ""
@@ -318,7 +318,7 @@ function EAS_CHECK_XML()
 		  if ReturnedHTML == LastReturnedHTML then
 			  if true then end
 		  else
-        local EAS_XML_Alert = string.match(body, "<alert>(.+)</alert>")
+        local EAS_XML_Alert = string.match(body, "<alert>(.*)</alert>")
         local EAS_XML_Org = string.match(EAS_XML_Alert, "<org>(.+)</org>")
         local EAS_XML_Event = string.match(EAS_XML_Alert, "<event>(.+)</event>")
         local EAS_XML_PSSCCC = string.match(EAS_XML_Alert, "<pssccc>(.+)</pssccc>")
@@ -328,10 +328,11 @@ function EAS_CHECK_XML()
         local EAS_XML_PSSCCC_Full = EAS_XML_PSSCCC_P .. EAS_XML_PSSCCC_SS .. EAS_XML_PSSCCC_CCC
         local EAS_XML_HHMM = string.match(EAS_XML_Alert, "<hhmm>(.+)</hhmm>")
         local EAS_XML_LLLLLLLL = string.match(EAS_XML_Alert, "<llllllll>(.+)</llllllll>")
-        local EAS_XML_LLLLLLLL_Fill = EAS_XML_LLLLLLLL .. string.rep(" ", 8 - EAS_XML_LLLLLLLL:len())
+        --local EAS_XML_LLLLLLLL_Fill = EAS_XML_LLLLLLLL .. string.rep(" ", 8 - EAS_XML_LLLLLLLL:len())
         local EAS_XML_SAME_HEADER = EAS_XML_Org.. "-" ..EAS_XML_Event.. "-" ..EAS_XML_PSSCCC_Full.. "-" ..EAS_XML_HHMM.. "-" ..EAS_XML_LLLLLLLL_Fill
         local EAS_XML_Message = string.match(EAS_XML_Alert, "<message>(.+)</message>")
-        EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL_Fill)
+        --EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL_Fill)
+        EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL)
         EAS_MakeMessage()
         --Make Send Message.
         chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), EAS_XML_SAME_HEADER, "\n")
