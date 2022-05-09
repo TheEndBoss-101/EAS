@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>EAS</org>
+    <org>PEP</org>
     <event>RDT</event>
     <pssccc>
         <p>0</p>
@@ -8,6 +8,6 @@
         <ccc>000</ccc>
     </pssccc>
     <hhmm>1200</hhmm>
-    <llllllll></llllllll>
+    <llllllll>TEB_101</llllllll>
     <message>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>
 </alert>
