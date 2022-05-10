@@ -2,6 +2,21 @@ EAS_DEVMODE = true
 
 EAS_DATA = {
   ["Key"] = {
+    ["USA-Type"] = {
+      ["M"] = "Mandatory code",
+      ["O1"] = "Original optional code",
+      ["O2"] = "2002 optional code",
+      ["O3"] = "2017 optional code",
+      ["NI"] = "NI"
+    },
+    ["CAN/MEX-Type"] = {
+      ["AB"] = "Administrative bulletin",
+      ["CI"] = "Currently implemented",
+      ["RT"] = "Required test",
+      ["FI"] = "For future implementation",
+      ["NI"] = "Not implemented",
+      ["TS"] = "Testing for Implementation"
+    },
     ["Event-Type"] = {
       ["ADV"] = "Advisory",
       ["WCH"] = "Watch",
@@ -20,80 +35,30 @@ EAS_DATA = {
       ["Code"] = "Civil authorities",
       ["Deprecated"] = false
     },
+    ["WXR"] = {
+      ["ID"] = "WXR",
+      ["Code"] = "National Weather Service",
+      ["Deprecated"] = false
+    },
     ["EAS"] = {
       ["ID"] = "EAS",
       ["Code"] = "EAS Participant",
       ["Deprecated"] = false
     },
-    ["ARC"] = {
-      ["ID"] = "ARC",
-      ["Code"] = "Annomly Research Center",
-      ["Deprecated"] = false
-    },
-    ["MTF"] = {
-      ["ID"] = "AMTF",
-      ["Code"] = "Anti Mingebag Task Force",
-      ["Deprecated"] = false
-    },
-    ["AMRC"] = {
-      ["ID"] = "AMRC",
-      ["Code"] = "Anti Mingebag Research Center",
-      ["Deprecated"] = false
+    ["EAN"] = {
+      ["ID"] = "EAN",
+      ["Code"] = "Emergency Action Notification Network",
+      ["Deprecated"] = true
     }
   },
   ["Events"] = {
     ["???"] = {
       ["ID"] = "???",
+      ["USA-Type"] = "",
+      ["CAN-Type"] = "",
+      ["MEX-Type"] = "",
       ["Description"] = "Unrecognized Event",
-      ["Level"] = "ADV",
-      ["Deprecated"] = false
-    },
-    ["DMO"] = {
-      ["ID"] = "DMO",
-      ["Description"] = "Practice/Demo Warning",
       ["Level"] = "TEST",
-      ["Deprecated"] = false
-    },
-    ["RMT"] = {
-      ["ID"] = "RMT",
-      ["Description"] = "Required Monthly Test",
-      ["Level"] = "TEST",
-      ["Deprecated"] = false
-    },
-    ["RWT"] = {
-      ["ID"] = "RWT",
-      ["Description"] = "Required Weekly Test",
-      ["Level"] = "TEST",
-      ["Deprecated"] = false
-    },
-    ["RDT"] = {
-      ["ID"] = "RDT",
-      ["Description"] = "Required Daily Test",
-      ["Level"] = "TEST",
-      ["Deprecated"] = false
-    },
-    ["EAN"] = {
-      ["ID"] = "EAN",
-      ["Description"] = "Emergency Action Notification",
-      ["Level"] = "WRN",
-      ["Deprecated"] = false
-    },
-    ["EAT"] = {
-      ["ID"] = "EAT",
-      ["Description"] = "Emergency Action Termination",
-      ["Level"] = "ADV",
-      ["Deprecated"] = true
-    },
-    ["NIC"] = {
-      ["ID"] = "NIC",
-      ["Description"] = "National Information Center",
-      ["Level"] = "ADV",
-      ["Deprecated"] = false
-    },
-    ["FUR"] = {
-      ["ID"] = "FUR",
-      ["Description"] = "National Furry Notification",
-      ["Level"] = "WRN",
       ["Deprecated"] = false
     }
   },
@@ -113,29 +78,25 @@ EAS_DATA = {
     ["Codes"] = {
       ["01"] = {
         ["ID"] = "01",
-        ["Name"] = "A.R.C.",
-        ["Alpha"] = "Anomaly. Research. Center.",
+        ["Name"] = "Alabama",
+        ["Alpha"] = "AL",
+        ["Class"] = "H1",
         ["Deprecated"] = false,
         ["County"] = {
           ["001"] = {
             ["ID"] = "001",
+            ["Class"] = "H1",
             ["Name"] = "Autauga County",
             ["Deprecated"] = false
           },
           ["003"] = {
             ["ID"] = "003",
+            ["Class"] = "H1",
             ["Name"] = "Baldwin County",
             ["Deprecated"] = false
           }
         }
       },
-      ["02"] = {
-        ["ID"] = "02",
-        ["Name"] = "A.M.T.F.",
-        ["Alpha"] = "Anti. Mingebag. Task. Force.",
-        ["Deprecated"] = false,
-        ["County"] = {}
-      }
     }
   },
   ["CallSign"] = {
@@ -143,31 +104,6 @@ EAS_DATA = {
       ["ID"] = "WHITEHSE",
       ["Code"] = "White House",
       ["PresOf"] = "United States Of America"
-    },
-    ["TEB_101"] = {
-      ["ID"] = "TEB_101",
-      ["Code"] = "TheEndBoss_101",
-      ["PresOf"] = "Emergency Alert System"
-    },
-    ["MOBENIX"] = {
-      ["ID"] = "MOB",
-      ["Code"] = "MOBENIX",
-      ["PresOf"] = "A.R.C."
-    },
-    ["MILO"] = {
-      ["ID"] = "MILO",
-      ["Code"] = "Milo",
-      ["PresOf"] = "A.M.T.F."
-    },
-    ["FLUFFY"] = {
-      ["ID"] = "FLUFFY",
-      ["Code"] = "Fluffy",
-      ["PresOf"] = ""
-    },
-    ["CACHE"] = {
-      ["ID"] = "CACHE",
-      ["Code"] = "Cache",
-      ["PresOf"] = ""
     }
   }
 }
@@ -194,6 +130,9 @@ function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
       print("")
     end
       EAS_DATA_Events_EEE_ID = EAS_DATA_Events_EEE["ID"]
+      EAS_DATA_Events_EEE_USA_Type = EAS_DATA_Events_EEE["USA-Type"]
+      EAS_DATA_Events_EEE_CAN_Type = EAS_DATA_Events_EEE["CAN-Type"]
+      EAS_DATA_Events_EEE_MEX_Type = EAS_DATA_Events_EEE["MEX-Type"]
       EAS_DATA_Events_EEE_Description = EAS_DATA_Events_EEE["Description"]
       EAS_DATA_Events_EEE_Level = EAS_DATA_Events_EEE["Level"]
       EAS_DATA_Events_EEE_Deprecated = EAS_DATA_Events_EEE["Deprecated"]
@@ -217,6 +156,7 @@ function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
         EAS_DATA_FIPS_Codes_SS_ID = EAS_DATA_FIPS_Codes_SS["ID"]
         EAS_DATA_FIPS_Codes_SS_Name = EAS_DATA_FIPS_Codes_SS["Name"]
         EAS_DATA_FIPS_Codes_SS_Alpha = EAS_DATA_FIPS_Codes_SS["Alpha"]
+        EAS_DATA_FIPS_Codes_SS_Class = EAS_DATA_FIPS_Codes_SS["Class"]
         EAS_DATA_FIPS_Codes_SS_Deprecated = EAS_DATA_FIPS_Codes_SS["Deprecated"]
           EAS_DATA_FIPS_Codes_SS_County = EAS_DATA_FIPS_Codes_SS["County"]
             EAS_DATA_FIPS_Codes_SS_County_CCC = EAS_DATA_FIPS_Codes_SS_County[CCC]
@@ -233,6 +173,7 @@ function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
               EAS_DATA_FIPS_Codes_SS_County_CCC_Deprecated = false
             else
               EAS_DATA_FIPS_Codes_SS_County_CCC_ID = EAS_DATA_FIPS_Codes_SS_County_CCC["ID"]
+              EAS_DATA_FIPS_Codes_SS_County_CCC_Class = EAS_DATA_FIPS_Codes_SS_County_CCC["Class"]
               EAS_DATA_FIPS_Codes_SS_County_CCC_Name = EAS_DATA_FIPS_Codes_SS_County_CCC["Name"]
               EAS_DATA_FIPS_Codes_SS_County_CCC_Deprecated = EAS_DATA_FIPS_Codes_SS_County_CCC["Deprecated"]
             end
@@ -258,6 +199,9 @@ function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("    Deprecated: " ..tostring(EAS_DATA_Originator_ORG_Deprecated))
     print("  Events:")
     print("    ID: " ..EAS_DATA_Events_EEE_ID)
+    print("    UAS-Type: " ..EAS_DATA_Events_EEE_USA_Type)
+    print("    CAN-Type: " ..EAS_DATA_Events_EEE_CAN_Type)
+    print("    MEX-Type: " ..EAS_DATA_Events_EEE_MEX_Type)
     print("    Description: " ..EAS_DATA_Events_EEE_Description)
     print("    Level: " ..EAS_DATA_Events_EEE_Level)
     print("    Deprecated: " ..tostring(EAS_DATA_Events_EEE_Deprecated))
@@ -268,9 +212,11 @@ function EAS_MakeGlobals(ORG, EEE, PSSCCC, HHMM, LLLLLLLL)
     print("        ID: " ..EAS_DATA_FIPS_Codes_SS_ID)
     print("        Name: " ..EAS_DATA_FIPS_Codes_SS_Name)
     print("        Alpha: " ..EAS_DATA_FIPS_Codes_SS_Alpha)
+    print("        Class: " ..EAS_DATA_FIPS_Codes_SS_Class)
     print("        Deprecated: " ..tostring(EAS_DATA_FIPS_Codes_SS_Deprecated))
     print("        County:")
     print("          ID: " ..EAS_DATA_FIPS_Codes_SS_County_CCC_ID)
+    print("          Class: " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Class)
     print("          Name: " ..EAS_DATA_FIPS_Codes_SS_County_CCC_Name)
     print("          Deprecated: " ..tostring(EAS_DATA_FIPS_Codes_SS_County_CCC_Deprecated))
     print("  CallSign:")
@@ -294,20 +240,12 @@ ReturnedHTML2 = ""
 LastReturnedHTML2 = "1"
 URL = "https://theendboss-101.github.io/EAS/EAS/Send.html"
 
-function EAS_CHECK_XML_CHECK()
-  EAS_CHECK_XML(true)
-end
-
-function EAS_CHECK_XML_TEST()
-  EAS_CHECK_XML(true)
-end
-
-function EAS_CHECK_XML(check)
+function EAS_CHECK_XML()
   URL = "https://theendboss-101.github.io/EAS/EAS/Send.xml"
   http.Fetch(URL,
     function(body, length, headers, code)
       ReturnedHTML = body
-		  if ReturnedHTML == LastReturnedHTML and check == true then
+		  if ReturnedHTML == LastReturnedHTML then
 			  if true then end
 		  else
         local EAS_XML_Alert = string.match(body, "<alert>(.*)</alert>")
@@ -339,8 +277,7 @@ function EAS_CHECK_XML(check)
     end
   )
 end
-concommand.Add("eas_check_xml", EAS_CHECK_XML_CHECK)
-concommand.Add("eas_test_xml", EAS_CHECK_XML_TEST)
+concommand.Add("eas_check_xml", EAS_CHECK_XML)
 timer.Create("EAS_CHECK_XML", 15, 0, EAS_CHECK_XML)
 chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
 end
