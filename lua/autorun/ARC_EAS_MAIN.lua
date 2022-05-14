@@ -90,10 +90,22 @@ EAS_DATA = {
       ["Level"] = "ADV",
       ["Deprecated"] = false
     },
-    ["FUR"] = {
-      ["ID"] = "FUR",
-      ["Description"] = "National Furry Notification",
+    ["FBW"] = {
+      ["ID"] = "FBW",
+      ["Description"] = "Furry Containment Breach",
       ["Level"] = "WRN",
+      ["Deprecated"] = false
+    },
+    ["CBW"] = {
+      ["ID"] = "CBW",
+      ["Description"] = "Containment Breach",
+      ["Level"] = "WRN",
+      ["Deprecated"] = false
+    },
+    ["CST"] = {
+      ["ID"] = "CST",
+      ["Description"] = "Soordinated Style Test",
+      ["Level"] = "TEST",
       ["Deprecated"] = false
     }
   },
