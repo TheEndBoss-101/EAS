@@ -104,7 +104,7 @@ EAS_DATA = {
     },
     ["CST"] = {
       ["ID"] = "CST",
-      ["Description"] = "Soordinated Style Test",
+      ["Description"] = "Coordinated Style Test",
       ["Level"] = "TEST",
       ["Deprecated"] = false
     }
