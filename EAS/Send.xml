@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>EAS</org>
-    <event>DMO</event>
+    <org>PEP</org>
+    <event>RDT</event>
     <pssccc>
         <p>0</p>
-        <ss>01</ss>
+        <ss>00</ss>
         <ccc>000</ccc>
     </pssccc>
-    <hhmm>9600</hhmm>
-    <llllllll>???</llllllll>
-    <message>I MAY NOT BE ABLE TO SEND DISCORD. I CAN SEND GAME.
-MESSAGE TO OLV (HEAD OF THE ARC):
-UNTIMEOUT THEENDBOSS_101</message>
+    <hhmm>1200</hhmm>
+    <llllllll>TEB_101</llllllll>
+    <message>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>
 </alert>
