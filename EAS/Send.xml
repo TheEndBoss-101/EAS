@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>PEP</org>
-    <event>NIC</event>
+    <org>EAS</org>
+    <event>DMO</event>
     <pssccc>
         <p>0</p>
         <ss>01</ss>
         <ccc>000</ccc>
     </pssccc>
     <hhmm>9600</hhmm>
-    <llllllll>TEB_101</llllllll>
-    <message>Long live TheEndBoss_101</message>
+    <llllllll>???</llllllll>
+    <message>at least i have a father @snuffow</message>
 </alert>
