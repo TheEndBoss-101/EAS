@@ -1,3 +1,5 @@
+--[[ EAS-ARC ]]--
+
 EAS_DEVMODE = true 
 
 EAS_DATA = {
@@ -38,6 +40,11 @@ EAS_DATA = {
     ["AMRC"] = {
       ["ID"] = "AMRC",
       ["Code"] = "Anti Mingebag Research Center",
+      ["Deprecated"] = false
+    },
+    ["???"] = {
+      ["ID"] = "???",
+      ["Code"] = "Unrecognized Originator",
       ["Deprecated"] = false
     }
   },
@@ -151,6 +158,11 @@ EAS_DATA = {
     }
   },
   ["CallSign"] = {
+    ["???"] = {
+      ["ID"] = "???",
+      ["Code"] = "???",
+      ["PresOf"] = "Unrecognized Call Sign"
+    },
     ["WHITEHSE"] = {
       ["ID"] = "WHITEHSE",
       ["Code"] = "White House",
@@ -162,8 +174,8 @@ EAS_DATA = {
       ["PresOf"] = "Emergency Alert System"
     },
     ["MOBENIX"] = {
-      ["ID"] = "MOB",
-      ["Code"] = "MOBENIX",
+      ["ID"] = "MOBENIX",
+      ["Code"] = "Mobenix",
       ["PresOf"] = "A.R.C."
     },
     ["MILO"] = {
@@ -179,6 +191,11 @@ EAS_DATA = {
     ["CACHE"] = {
       ["ID"] = "CACHE",
       ["Code"] = "Cache",
+      ["PresOf"] = ""
+    },
+    ["BREAD"] = {
+      ["ID"] = "BREAD",
+      ["Code"] = "Bread",
       ["PresOf"] = ""
     }
   }
@@ -299,12 +316,31 @@ function EAS_MakeMessage()
   end
 end
 
-if CLIENT then
+function EAS_MAKE_ALERT_POPUP(EAS_XML_SAME_HEADER, EAS_XML_Message)
+    if EAS_XML_SAME_HEADER == nil then
+    EAS_XML_SAME_HEADER = "???-???-000000-0000-???"
+  end
+  if EAS_XML_Message == nil then
+    EAS_XML_Message = "ERROR: MESSAGE IS NIL"
+  end
+  --local Alert = vgui.Create("DFrame")
+--[[Alert:SetSize(ScrW() / 4, ScrH() / 3)
+Alert:SetTitle("EAS EVENT") 
+Alert:SetVisible(true) 
+Alert:SetDraggable(false) 
+Alert:ShowCloseButton(true) 
+Alert:MakePopup()
+Alert:Center()
+Alert:SetBackgroundBlur(true)]]
+Derma_Message(tostring(EAS_XML_SAME_HEADER), "EAS EVENT", "OK")
+end
+
+
 ReturnedHTML = ""
 LastReturnedHTML = "1"
 ReturnedHTML2 = ""
 LastReturnedHTML2 = "1"
-URL = "https://theendboss-101.github.io/EAS/EAS/Send.html"
+URL = "https://theendboss-101.github.io/EAS/EAS/Send.xml"
 
 function EAS_CHECK_XML_CHECK()
   EAS_CHECK_XML(true)
@@ -315,7 +351,6 @@ function EAS_CHECK_XML_TEST()
 end
 
 function EAS_CHECK_XML(check)
-  URL = "https://theendboss-101.github.io/EAS/EAS/Send.xml"
   http.Fetch(URL,
     function(body, length, headers, code)
       ReturnedHTML = body
@@ -333,26 +368,28 @@ function EAS_CHECK_XML(check)
         local EAS_XML_HHMM = string.match(EAS_XML_Alert, "<hhmm>(.+)</hhmm>")
         local EAS_XML_LLLLLLLL = string.match(EAS_XML_Alert, "<llllllll>(.+)</llllllll>")
         --local EAS_XML_LLLLLLLL_Fill = EAS_XML_LLLLLLLL .. string.rep(" ", 8 - EAS_XML_LLLLLLLL:len())
-        local EAS_XML_SAME_HEADER = EAS_XML_Org.. "-" ..EAS_XML_Event.. "-" ..EAS_XML_PSSCCC_Full.. "-" ..EAS_XML_HHMM.. "-" ..EAS_XML_LLLLLLLL_Fill
+        local EAS_XML_SAME_HEADER = EAS_XML_Org.. "-" ..EAS_XML_Event.. "-" ..EAS_XML_PSSCCC_Full.. "-" ..EAS_XML_HHMM.. "-" ..EAS_XML_LLLLLLLL
         local EAS_XML_Message = string.match(EAS_XML_Alert, "<message>(.+)</message>")
         --EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL_Fill)
         EAS_MakeGlobals(EAS_XML_Org, EAS_XML_Event, EAS_XML_PSSCCC_Full, EAS_XML_HHMM, EAS_XML_LLLLLLLL)
         EAS_MakeMessage()
-        --Make Send Message.
-        chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), EAS_XML_SAME_HEADER, "\n")
-        chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message, "\n")
-        if EAS_DATA_Events_EEE_Level == "TEST" then
-          chat.AddText(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.", "\n")
-        end
-        chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), EAS_XML_Message, "\n")
-        chat.PlaySound()
+          chat.AddText(Color(255,74,74), "Same Header: ", Color(150,255,255), EAS_XML_SAME_HEADER, "\n")
+  chat.AddText(Color(255,74,74), "EAS EVENT: ", Color(150,255,255), Same_Message, "\n")
+  if EAS_DATA_Events_EEE_Level == "TEST" then
+    chat.AddText(Color(255,74,74), "TEST: ", Color(150,255,255), "THIS IS A TEST OF THE EAS SYSTEM AND IS ONLY A TEST.", "\n")
+  end
+  chat.AddText(Color(255,74,74), "Transcript: ", Color(150,255,255), EAS_XML_Message, "\n")
+  chat.PlaySound()
+        Derma_Message("EMERGENCY ALERT SYSTEM\nAlert Issued By:\n" ..EAS_DATA_CallSign_LLLLLLLL_Code.. "MESSAGE:\n" ..EAS_XML_Message, "EAS EVENT", "OK")
         LastReturnedHTML = ReturnedHTML
       end
     end
   )
 end
+
 concommand.Add("eas_check_xml", EAS_CHECK_XML_CHECK)
 concommand.Add("eas_test_xml", EAS_CHECK_XML_TEST)
-timer.Create("EAS_CHECK_XML", 15, 0, EAS_CHECK_XML)
-chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Above.")
-end
+concommand.Add("eas_send_chat", EAS_SEND_CHAT)
+concommand.Add("eas_make_alert_popup", EAS_MAKE_ALERT_POPUP)
+timer.Create("EAS_CHECK_XML", 15, 0, EAS_CHECK_XML_CHECK)
+chat.AddText(Color(255,74,74), "WARNING: ", Color(150,255,255), "Ignore Below.")
