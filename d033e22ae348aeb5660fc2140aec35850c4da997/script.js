@@ -98,24 +98,7 @@ function Send_RDT_Message_Discord() {
     request.open("POST", `${EAS_WEBHOOK}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: ``,
-        tts: false,
-        allowed_mentions: { "parse": [] }
-    }
-
-    if (document.getElementById('TTS').checked) {
-        params.tts = true
-    }
-    else{
-        params.tts = false
-    }
-    if (document.getElementById('AtEveryone').checked) {
-        params.content = `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["everyone"] }
-    }
-    else{
-        params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": [] }
+        content: `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
     }
 
     request.send(JSON.stringify(params));
@@ -137,9 +120,8 @@ function Send_RWT_Message_Discord() {
     request.open("POST", `${EAS_WEBHOOK}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: ``,
-        tts: false,
-        allowed_mentions: { "parse": [] }
+        content: `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``,
+        tts: false
     }
 
     if (document.getElementById('TTS').checked) {
@@ -147,14 +129,6 @@ function Send_RWT_Message_Discord() {
     }
     else{
         params.tts = false
-    }
-    if (document.getElementById('AtEveryone').checked) {
-        params.content = `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["everyone"] }
-    }
-    else{
-        params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": [] }
     }
 
     request.send(JSON.stringify(params));
@@ -215,9 +189,9 @@ function Send_EAN_Message_Discord() {
     request.open("POST", `${EAS_WEBHOOK}`);
     request.setRequestHeader('Content-type', 'application/json');
     const params = {
-        content: ``,
+        content: `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``,
         tts: false,
-        allowed_mentions: { "parse": [] }
+        allowed_mentions: { "parse": ["everyone"] }
     }
 
     if (document.getElementById('TTS').checked) {
@@ -225,14 +199,6 @@ function Send_EAN_Message_Discord() {
     }
     else{
         params.tts = false
-    }
-    if (document.getElementById('AtEveryone').checked) {
-        params.content = `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["everyone"] }
-    }
-    else{
-        params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": [] }
     }
 
     request.send(JSON.stringify(params));
