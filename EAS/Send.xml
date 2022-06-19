@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>AMRC</org>
+    <org>EAS</org>
     <event>DMO</event>
     <pssccc>
         <p>0</p>
-        <ss>01</ss>
-        <ccc>002</ccc>
+        <ss>00</ss>
+        <ccc>000</ccc>
     </pssccc>
     <hhmm>0015</hhmm>
-    <llllllll>FLUFFY</llllllll>
-    <message>Hello everyone this announcement is because we now have an official wiki for gm13b the link will be posted in the following minutes</message>
+    <llllllll>WHITEHSE</llllllll>
+    <message>https://gmc13bwiki.xalalau.com/index.php/Main_Page</message>
 </alert>
