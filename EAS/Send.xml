@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>EAS</org>
-    <event>RDT</event>
+    <org>AMRC</org>
+    <event>DMO</event>
     <pssccc>
         <p>0</p>
         <ss>01</ss>
         <ccc>002</ccc>
     </pssccc>
-    <hhmm>1200</hhmm>
-    <llllllll>WHITEHSE</llllllll>
-    <message>This is a coordinated daily test of the broadcast stations of your area. We are testing equipment that can quickly warn you during emergencies. If this had been an actual emergency, an official message would have followed the alert tone. This concludes this test of the Emergency Alert System.</message>
+    <hhmm>0015</hhmm>
+    <llllllll>FLUFFY</llllllll>
+    <message>Hello everyone this announcement is because we now have an official wiki for gm13b the link will be posted in the following minutes</message>
 </alert>
