@@ -71,8 +71,8 @@ function Send_EAS_Message_Discord() {
         params.tts = false
     }
     if (document.getElementById('AtRole').checked) {
-        params.content = `<@EAS-OPT > \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "roles": ["EAS-OPT "] }
+        params.content = `<@EAS-OPT> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "roles": ["EAS-OPT"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
@@ -162,8 +162,8 @@ function Send_RMT_Message_Discord() {
         params.tts = false
     }
     if (document.getElementById('AtRole').checked) {
-        params.content = `<@EAS-OPT > \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "roles": ["EAS-OPT "] }
+        params.content = `<@EAS-OPT> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "roles": ["EAS-OPT"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
