@@ -70,9 +70,9 @@ function Send_EAS_Message_Discord() {
     else{
         params.tts = false
     }
-    if (document.getElementById('AtRole').checked) {
-        params.content = `@EAS-OPT \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["EAS-OPT"] }
+    if (document.getElementById('AtEveryone').checked) {
+        params.content = `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
@@ -161,9 +161,9 @@ function Send_RMT_Message_Discord() {
     else{
         params.tts = false
     }
-    if (document.getElementById('AtRole').checked) {
-        params.content = `@EAS-OPT \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["EAS-OPT"] }
+    if (document.getElementById('AtEveryone').checked) {
+        params.content = `@everyone \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "parse": ["everyone"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``

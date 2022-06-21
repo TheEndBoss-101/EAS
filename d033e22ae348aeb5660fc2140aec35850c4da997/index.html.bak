@@ -250,7 +250,7 @@
                 <option value="MTF">AMTF - Anti Mingebag Task Force</option>
                 <option value="AMRC">AMRC - Anti Mingebag Research Center</option>
                 <option value="???">--- USED INTERNALY ---</option>
-                <option value="???">??? - Unrecognized Originator</option>
+                <option value="???">??? - Unrecognized Event</option>
             </select>
         </fieldset>
         <fieldset>
@@ -295,11 +295,11 @@
         </fieldset>
         <fieldset>
             <legend>Settings</legend>
-            <label for="TTS">Text To Speach? - </label>
+            <label for="TTS">Text To Speach - </label>
             <input id="TTS" type="checkbox">
             <br>
-            <label for="">@role? - </label>
-            <input id="AtRole" type="checkbox">
+            <label for="AtEveryone">@everyone - </label>
+            <input id="AtEveryone" type="checkbox">
         </fieldset>
     </fieldset>
     <fieldset>
