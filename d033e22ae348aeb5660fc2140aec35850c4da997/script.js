@@ -1,4 +1,4 @@
-console.log("Emergency Alert System - V:2.0.0")
+console.log("Emergency Alert System - V:2.1.0")
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
