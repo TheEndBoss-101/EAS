@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <alert>
-    <org>PEP</org>
+    <org>EAS</org>
     <event>CST</event>
     <pssccc>
         <p>0</p>
@@ -8,6 +8,6 @@
         <ccc>000</ccc>
     </pssccc>
     <hhmm>0015</hhmm>
-    <llllllll>TEB_101</llllllll>
+    <llllllll>WHITEHSE</llllllll>
     <message>Message</message>
 </alert>
