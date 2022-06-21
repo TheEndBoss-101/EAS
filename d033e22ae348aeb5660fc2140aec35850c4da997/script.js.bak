@@ -1,4 +1,4 @@
-console.log("Emergency Alert System - V:2.1.3")
+console.log("Emergency Alert System - V:2.1.4")
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -71,8 +71,8 @@ function Send_EAS_Message_Discord() {
         params.tts = false
     }
     if (document.getElementById('AtRole').checked) {
-        params.content = `<@EAS-OPT> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "roles": ["EAS-OPT"] }
+        params.content = `<@&988911824839790643> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "parse": ["roles"], "roles": ["988911824839790643"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
@@ -162,8 +162,8 @@ function Send_RMT_Message_Discord() {
         params.tts = false
     }
     if (document.getElementById('AtRole').checked) {
-        params.content = `<@EAS-OPT> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "roles": ["EAS-OPT"] }
+        params.content = `<@&988911824839790643> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
+        params.allowed_mentions = { "parse": ["roles"], "roles": ["988911824839790643"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``

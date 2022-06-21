@@ -1,4 +1,4 @@
-console.log("Emergency Alert System - V:2.1.4")
+console.log("Emergency Alert System - V:2.1.5")
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -61,7 +61,6 @@ function Send_EAS_Message_Discord() {
     const params = {
         content: ``,
         tts: false,
-        allowed_mentions: { "parse": [] }
     }
 
     if (document.getElementById('TTS').checked) {
@@ -72,11 +71,9 @@ function Send_EAS_Message_Discord() {
     }
     if (document.getElementById('AtRole').checked) {
         params.content = `<@&988911824839790643> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["roles"], "roles": ["988911824839790643"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": [] }
     }
 
     request.send(JSON.stringify(params));
@@ -152,7 +149,6 @@ function Send_RMT_Message_Discord() {
     const params = {
         content: ``,
         tts: false,
-        allowed_mentions: { "parse": [] }
     }
 
     if (document.getElementById('TTS').checked) {
@@ -163,11 +159,9 @@ function Send_RMT_Message_Discord() {
     }
     if (document.getElementById('AtRole').checked) {
         params.content = `<@&988911824839790643> \n :rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": ["roles"], "roles": ["988911824839790643"] }
     }
     else{
         params.content = `:rotating_light:** === *EAS MESSAGE* ===** :rotating_light:\nHeader: \`${ORG}-${EEE}-${PSSCCC}-${HHMM}-${LLLLLLLL}\`\nMessage: \`${MSG}\``
-        params.allowed_mentions = { "parse": [] }
     }
 
     request.send(JSON.stringify(params));
